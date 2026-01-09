@@ -8,12 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: #f8f9fa;
-    color: #1a1a1a;
-    padding-bottom: 100px;
-}
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8f9fa; color: #1a1a1a; padding-bottom: 120px; }
 .glass-header { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); }
 .product-card { background: white; border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); transition: 0.3s; cursor: pointer; position: relative; }
 .product-card:active { transform: scale(0.96); }
@@ -27,15 +22,17 @@ body {
 .nav-item.active { color: white; }
 .discount-tag { position: absolute; top: 8px; left: 8px; background: #ff4d4d; color: white; padding: 3px 7px; border-radius: 6px; font-size: 9px; font-weight: 800; z-index: 10; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+#product-detail-content::-webkit-scrollbar { width: 0; }
+h3 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.category-scroll, #vitrine { scroll-behavior: smooth; }
 </style>
 </head>
-
 <body>
 
 <header class="glass-header sticky top-0 z-50 border-b border-gray-100 px-5 py-4 flex justify-between items-center">
     <div>
         <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Laranjal do Jari</p>
-        <h1 class="text-4xl font-extrabold tracking-tighter">JARDSON<span class="text-[#ee4d2d]">IMPORTS</span></h1>
+        <h1 class="text-5xl font-extrabold tracking-tighter">JARDSON<span class="text-[#ee4d2d]">IMPORTS</span></h1>
     </div>
     <button onclick="openModal('cart-modal')" class="relative p-2 bg-gray-100 rounded-full">
         <i class="fa-solid fa-cart-shopping"></i>
@@ -43,13 +40,12 @@ body {
     </button>
 </header>
 
-<div class="flex overflow-x-auto gap-2 max-w-5xl mx-auto pb-4 category-scroll justify-start md:justify-center px-4 mt-4">
+<div class="flex overflow-x-auto gap-2 max-w-5xl mx-auto pb-4 category-scroll justify-start md:justify-center px-4 mt-4 no-scrollbar">
     <span onclick="filterCategory('all', this)" class="category-pill active">Todos</span>
     <span onclick="filterCategory('iphone', this)" class="category-pill">iPhone</span>
     <span onclick="filterCategory('samsung', this)" class="category-pill">Samsung</span>
     <span onclick="filterCategory('xiaomi', this)" class="category-pill">Xiaomi</span>
     <span onclick="filterCategory('tablet', this)" class="category-pill">Tablet</span>
-    <span onclick="filterCategory('realme', this)" class="category-pill">Realme</span>
     <span onclick="filterCategory('som', this)" class="category-pill">Som</span>
     <span onclick="filterCategory('motorola', this)" class="category-pill">Motorola</span>
     <span onclick="filterCategory('tv', this)" class="category-pill">TV & Box</span>
@@ -60,78 +56,34 @@ body {
 
 <main class="p-4 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-5xl mx-auto" id="vitrine"></main>
 
-<footer class="bg-white border-t border-gray-100 pt-10 pb-32 px-6 mt-10">
-    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-            <h3 class="text-lg font-black tracking-tighter mb-4 text-gray-800">JARDSON<span class="text-[#ee4d2d]">IMPORTS</span></h3>
-            <p class="text-gray-500 text-sm leading-relaxed">
-                Referência em tecnologia e importados em Laranjal do Jari. Qualidade, preço justo e garantia em todos os nossos produtos.
-            </p>
-        </div>
-
-        <div>
-            <h4 class="font-extrabold text-[11px] uppercase tracking-widest mb-4 text-gray-400">Atendimento</h4>
-            <ul class="space-y-3">
-                <li class="flex items-center gap-3 text-sm text-gray-600">
-                    <i class="fa-solid fa-location-dot text-[#ee4d2d] w-4"></i>
-                    <span>Laranjal do Jari, Amapá</span>
-                </li>
-                <li class="flex items-center gap-3 text-sm text-gray-600">
-                    <i class="fa-solid fa-whatsapp text-[#ee4d2d] w-4"></i>
-                    <span>(96) 99118-9596</span>
-                </li>
-                <li class="flex items-center gap-3 text-sm text-gray-600">
-                    <i class="fa-solid fa-clock text-[#ee4d2d] w-4"></i>
-                    <span>Seg - Sáb: 08:00 às 18:00</span>
-                </li>
-            </ul>
-        </div>
-
-        <div>
-            <h4 class="font-extrabold text-[11px] uppercase tracking-widest mb-4 text-gray-400">Siga-nos</h4>
-            <div class="flex gap-3">
-                <a href="#" class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-700 hover:bg-[#ee4d2d] hover:text-white transition-all">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-                <a href="#" class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-700 hover:bg-[#ee4d2d] hover:text-white transition-all">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-                <a href="#" class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-700 hover:bg-[#ee4d2d] hover:text-white transition-all">
-                    <i class="fa-brands fa-tiktok"></i>
-                </a>
-            </div>
-            <p class="text-[10px] text-gray-400 mt-8 font-medium">
-                © 2026 JARDSON IMPORTS. Todos os direitos reservados.
-            </p>
-        </div>
+<!-- MODAIS -->
+<div id="product-modal" class="side-modal flex flex-col">
+    <div class="p-6 border-b flex justify-between items-center bg-white sticky top-0 z-10">
+        <button onclick="closeAllModals()" class="text-gray-500 font-bold flex items-center gap-2 text-sm"><i class="fa-solid fa-chevron-left"></i> VOLTAR</button>
+        <span class="font-black text-xs uppercase tracking-widest text-gray-400">Produto</span>
+        <div class="w-10"></div>
     </div>
-</footer>
+    <div class="flex-1 overflow-y-auto" id="product-detail-content"></div>
+</div>
 
-<!-- MODAL USUÁRIO -->
 <div id="profile-modal" class="side-modal">
     <div class="p-6">
         <button onclick="closeAllModals()" class="mb-6"><i class="fa-solid fa-xmark text-xl"></i></button>
         <div id="user-logged" class="hidden text-center">
             <div class="relative w-24 h-24 mx-auto mb-4">
                 <img id="profile-pic" src="https://via.placeholder.com/150" class="w-24 h-24 rounded-full object-cover border-2 border-[#ee4d2d]">
-                <label for="photo-input" class="absolute bottom-0 right-0 bg-[#ee4d2d] text-white w-7 h-7 rounded-full flex items-center justify-center cursor-pointer">
-                    <i class="fa-solid fa-camera text-xs"></i>
-                </label>
-                <input type="file" id="photo-input" accept="image/*" class="hidden">
             </div>
             <h3 id="user-name-display" class="font-bold text-lg"></h3>
             <p id="user-addr-display" class="text-xs text-gray-500"></p>
-            <p id="user-ref-display" class="text-[10px] text-orange-500 italic mb-6"></p>
-            <button onclick="logout()" class="w-full py-3 bg-red-50 text-red-500 rounded-xl font-bold text-sm uppercase">Sair / Editar</button>
+            <button onclick="logout()" class="w-full mt-6 py-3 bg-red-50 text-red-500 rounded-xl font-bold text-sm uppercase">Sair / Editar</button>
         </div>
         <form id="user-form" class="space-y-4">
             <h2 class="font-black text-xl">Seu Cadastro</h2>
             <input type="text" id="reg-nome" placeholder="Nome Completo" required class="w-full p-4 bg-gray-50 rounded-xl text-sm outline-none">
             <input type="text" id="reg-rua" placeholder="Rua / Avenida" required class="w-full p-4 bg-gray-50 rounded-xl text-sm outline-none">
-            <input type="text" id="reg-num" placeholder="Número da Casa" required class="w-full p-4 bg-gray-50 rounded-xl text-sm outline-none">
+            <input type="text" id="reg-num" placeholder="Número" required class="w-full p-4 bg-gray-50 rounded-xl text-sm outline-none">
             <input type="text" id="reg-bairro" placeholder="Bairro" required class="w-full p-4 bg-gray-50 rounded-xl text-sm outline-none">
-            <input type="text" id="reg-ref" placeholder="Ponto de Referência" class="w-full p-4 bg-gray-50 rounded-xl text-sm outline-none">
-            <button type="submit" class="w-full py-4 bg-[#ee4d2d] text-white rounded-xl font-bold shadow-lg">SALVAR DADOS</button>
+            <button type="submit" class="w-full py-4 bg-[#ee4d2d] text-white rounded-xl font-bold">SALVAR DADOS</button>
         </form>
     </div>
 </div>
@@ -145,25 +97,22 @@ body {
     </div>
     <div class="flex-1 overflow-y-auto p-4" id="cart-items"></div>
     <div class="p-4 bg-white border-t">
-        <div class="flex gap-2 mb-4">
-            <input type="text" id="coupon-input" placeholder="CUPOM: JARDSON25" class="flex-1 p-3 bg-gray-50 rounded-xl text-sm outline-none border border-gray-100 uppercase">
-            <button onclick="applyCoupon()" class="px-4 bg-black text-white rounded-xl text-xs font-bold">APLICAR</button>
-        </div>
-        <div class="flex justify-between text-sm text-gray-500 mb-1"><span>Subtotal:</span><span id="sub-val">R$ 0,00</span></div>
-        <div class="flex justify-between text-sm text-gray-500 mb-3"><span>Desconto:</span><span id="desc-val" class="text-green-600">- R$ 0,00</span></div>
         <div class="flex justify-between mb-4 font-black text-xl text-[#ee4d2d]"><span>Total:</span><span id="total-val">R$ 0,00</span></div>
-        <button onclick="finishOrder()" class="w-full py-4 bg-green-500 text-white rounded-2xl font-bold flex items-center justify-center gap-2">
-            <i class="fa-brands fa-whatsapp text-xl"></i> FINALIZAR NO WHATSAPP
+        
+        <!-- BOTÃO FINALIZAR -->
+        <button id="finalize-btn" onclick="showPix()" class="w-full py-4 bg-green-500 text-white rounded-2xl font-bold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-qrcode text-xl"></i> FINALIZAR COMPRA
         </button>
-        <button onclick="showPix()" class="w-full py-4 mt-2 bg-yellow-500 text-black rounded-2xl font-bold flex items-center justify-center gap-2">
-            <i class="fa-solid fa-qrcode"></i> PAGAR COM PIX
-        </button>
-        <div id="pix-div" class="hidden mt-4 text-center">
-    <img src="https://generator.qrcodefacil.com/qrcodes/static-99f92ef4525d0800f680831097f0145a.svg" alt="PIX QR" class="mx-auto mb-2">
-    <input type="text" id="pix-code" value="00020126500014BR.GOV.BCB.PIX0128jardsonimportsrico@gmail.com5204000053039865802BR5925JARDSON DOS SANTOS PEREIR6009SAO PAULO62140510sTh0SROYwZ6304DF37" readonly class="w-full p-3 text-sm border rounded-lg text-center bg-gray-100 cursor-pointer" onclick="this.select(); document.execCommand('copy'); alert('PIX copiado!')">
-    <p class="mt-2 text-sm font-bold">Clique no código para copiar</p>
-</div>
 
+        <!-- SEÇÃO PIX (escondida inicialmente) -->
+        <div id="pix-section" class="mt-4 hidden flex flex-col items-center gap-4">
+            <img src="https://generator.qrcodefacil.com/qrcodes/static-99f92ef4525d0800f680831097f0145a.svg" alt="QR Code PIX" class="w-48 h-48">
+            <p class="text-sm font-bold text-gray-700 break-all text-center">Chave PIX: jardsonimportsrico@gmail.com</p>
+            <button onclick="copyPix()" class="w-full py-3 bg-green-700 text-white rounded-2xl font-bold text-center">Copiar PIX</button>
+            <button onclick="sendWhatsApp()" class="w-full py-3 bg-blue-600 text-white rounded-2xl font-bold text-center mt-2">
+                Enviar Pedido pelo WhatsApp
+            </button>
+        </div>
     </div>
 </div>
 
@@ -174,6 +123,7 @@ body {
 </nav>
 
 <script>
+// PRODUTOS
 const products = [
             // IPHONES
             { id: 1, name: "Apple iPhone 17 Pro Max (256 GB) Laranja cósmico", price: 10099, promo: true, category: "iphone", image: "https://m.media-amazon.com/images/I/51nj2ICJyeL._AC_SX342_.jpg" },
@@ -267,123 +217,138 @@ const products = [
             { id: 64, name: "Micro-ondas midea 20L Prata Porta Espelhada", price: 699, promo: false, category: "outros", image: "https://m.media-amazon.com/images/I/61FevnWBKmL._AC_SX679_.jpg" },
             { id: 65, name: "Micro-ondas philco 25L Prata Porta Espelhada", price: 899, promo: false, category: "outros", image: "https://m.media-amazon.com/images/I/617WMTv2+wL._AC_SX679_.jpg" },
             { id: 66, name: "Panela de Pressão Elétrica 6L Digit Mideaa", price: 599, promo: false, category: "outros", image: "https://m.media-amazon.com/images/I/614G6tkffwL._AC_SX679_.jpg" },
-
 ];
 
-// ---------- CARRINHO ----------
 let cart = [];
 let user = JSON.parse(localStorage.getItem('jardson_db')) || null;
-let discount = 0;
-let activeCoupon = "Nenhum";
 
-// ---------- RENDER PRODUTOS ----------
+// RENDERIZAÇÃO
 function renderProducts(cat='all'){
     const vitrine = document.getElementById('vitrine');
     const filtered = cat==='all'? products : products.filter(p=>p.category===cat);
     vitrine.innerHTML = filtered.map(p => `
-        <div class="product-card p-3" onclick="addToCart(${p.id})">
+        <div class="product-card p-3" onclick="openProductDetail(${p.id})">
             ${p.promo?'<span class="discount-tag">PROMOÇÃO</span>':''}
             <img src="${p.image}" class="w-full aspect-square object-contain mb-3 rounded-lg">
-            <h3 class="text-[10px] font-bold text-gray-700 h-8 line-clamp-2 leading-tight">${p.name}</h3>
+            <h3 class="text-[10px] font-bold text-gray-700 h-8 leading-tight">${p.name}</h3>
             <p class="text-sm font-black text-[#ee4d2d] mt-2">R$ ${p.price.toLocaleString('pt-BR')}</p>
-            <button class="w-full mt-2 py-2 bg-black text-white text-[9px] font-bold rounded-lg uppercase">Adicionar</button>
+            <button class="w-full mt-2 py-2 bg-black text-white text-[9px] font-bold rounded-lg uppercase">Ver Detalhes</button>
         </div>
     `).join('');
 }
 
-// ---------- FILTRO ----------
+// DETALHE PRODUTO
+function openProductDetail(id){
+    const p = products.find(prod => prod.id === id);
+    const msgDuvida = encodeURIComponent(`Olá Jardson! Tenho interesse no ${p.name}. Pode me dar mais informações?`);
+    document.getElementById('product-detail-content').innerHTML = `
+        <div class="p-6">
+            <img src="${p.image}" class="w-full aspect-square object-contain rounded-2xl mb-6 bg-gray-50 p-4">
+            <h2 class="text-2xl font-black mb-2 text-gray-800">${p.name}</h2>
+            <p class="text-3xl font-black text-[#ee4d2d] mb-4">R$ ${p.price.toLocaleString('pt-BR')}</p>
+            <div class="bg-gray-100 p-4 rounded-2xl mb-8">
+                <h4 class="text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Descrição do Produto</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">${p.description}</p>
+            </div>
+            <div class="flex flex-col gap-3">
+                <button onclick="addToCart(${p.id}); closeAllModals(); openModal('cart-modal');" 
+                        class="w-full py-4 bg-black text-white rounded-2xl font-bold flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-cart-plus"></i> ADICIONAR À SACOLA
+                </button>
+                <a href="https://wa.me/5596991189596?text=${msgDuvida}" target="_blank"
+                   class="w-full py-4 bg-white border-2 border-green-500 text-green-600 rounded-2xl font-bold flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> TIRAR DÚVIDA
+                </a>
+            </div>
+        </div>
+    `;
+    openModal('product-modal');
+}
+
+// FILTRO
 function filterCategory(cat, el){
     document.querySelectorAll('.category-pill').forEach(p=>p.classList.remove('active'));
     el.classList.add('active');
     renderProducts(cat);
 }
 
-// ---------- CARRINHO ----------
-function addToCart(id){ cart.push(products.find(p=>p.id===id)); updateCart(); openModal('cart-modal'); }
-function clearCart(){ if(confirm("Deseja limpar sua sacola?")){ cart=[]; updateCart(); } }
+// CARRINHO
+function addToCart(id){ cart.push(products.find(p=>p.id===id)); updateCart(); }
 function removeFromCart(i){ cart.splice(i,1); updateCart(); }
 function updateCart(){
     document.getElementById('cart-count').innerText = cart.length;
     const itemsDiv = document.getElementById('cart-items');
-    itemsDiv.innerHTML = cart.length===0?'<div class="text-center py-10 text-gray-400">Sacola vazia</div>':
+    itemsDiv.innerHTML = cart.length===0?'<div class="text-center py-10 text-gray-400 font-bold">Sua sacola está vazia</div>':
     cart.map((p,i)=>`<div class="flex items-center gap-3 bg-gray-50 p-3 rounded-xl mb-2">
-        <img src="${p.image}" class="w-10 h-10 object-contain rounded bg-white">
-        <div class="flex-1"><h4 class="text-[10px] font-bold">${p.name}</h4><p class="text-xs text-[#ee4d2d]">R$ ${p.price.toLocaleString('pt-BR')}</p></div>
-        <button onclick="removeFromCart(${i})" class="text-red-500"><i class="fa-solid fa-xmark"></i></button>
+        <img src="${p.image}" class="w-10 h-10 object-contain">
+        <div class="flex-1 text-[10px] font-bold">${p.name}</div>
+        <button onclick="removeFromCart(${i})" class="text-red-500 p-2"><i class="fa-solid fa-xmark"></i></button>
     </div>`).join('');
-    calculateTotal();
-}
-
-// ---------- CUPOM ----------
-function applyCoupon(){ 
-    const cup = document.getElementById('coupon-input').value.trim();
-    if(cup.toUpperCase()==='JARDSON25'){ discount=0.25; activeCoupon='JARDSON25'; alert("Cupom aplicado: 25% OFF"); }
-    else { discount=0; activeCoupon="Nenhum"; alert("Cupom inválido"); }
-    calculateTotal();
-}
-
-// ---------- TOTAL ----------
-function calculateTotal(){
-    const sub = cart.reduce((a,b)=>a+b.price,0);
-    const desc = Math.floor(sub*discount);
-    const total = sub-desc;
-    document.getElementById('sub-val').innerText = `R$ ${sub.toLocaleString('pt-BR')}`;
-    document.getElementById('desc-val').innerText = `- R$ ${desc.toLocaleString('pt-BR')}`;
+    const total = cart.reduce((a,b)=>a+b.price,0);
     document.getElementById('total-val').innerText = `R$ ${total.toLocaleString('pt-BR')}`;
 }
 
-// ---------- FINALIZAR WHATSAPP ----------
-function finishOrder(){
-    if(!user){ alert("Preencha seus dados antes de finalizar."); openModal('profile-modal'); return; }
-    if(cart.length===0){ alert("Sua sacola está vazia."); return; }
-    let msg=`🚀 *NOVO PEDIDO - JARDSON IMPORTS*\n\n📦 *ITENS:*\n`;
-    cart.forEach(p=>{ msg+=`- ${p.name} - R$ ${p.price.toLocaleString('pt-BR')}\n`; });
-    msg+=`\n💰 *TOTAL:* ${document.getElementById('total-val').innerText}\n🎟️ *CUPOM:* ${activeCoupon}\n----------------------------\n👤 *CLIENTE:* ${user.nome}\n📍 *ENDEREÇO:* ${user.rua}, Nº ${user.num}\n🏘️ *BAIRRO:* ${user.bairro}\n🔍 *REF:* ${user.ref || ''}`;
-    window.open(`https://wa.me/5596991189596?text=${encodeURIComponent(msg)}`);
-}
-
-// ---------- MODAIS ----------
+// MODAIS
 function openModal(id){ document.getElementById(id).classList.add('active'); }
 function closeAllModals(){ document.querySelectorAll('.side-modal').forEach(m=>m.classList.remove('active')); }
-function showPix(){ document.getElementById('pix-div').classList.toggle('hidden'); }
+function clearCart(){ cart=[]; updateCart(); document.getElementById('pix-section').classList.add('hidden'); document.getElementById('finalize-btn').classList.remove('hidden'); }
 
-// ---------- CADASTRO ----------
+// PIX
+function showPix(){
+    if(!user){ alert("Cadastre seu endereço no perfil!"); openModal('profile-modal'); return; }
+    if(cart.length===0) return;
+    document.getElementById('pix-section').classList.remove('hidden');
+    document.getElementById('finalize-btn').classList.add('hidden');
+}
+
+function copyPix(){
+    const pixKey = '00020126500014BR.GOV.BCB.PIX0128jardsonimportsrico@gmail.com5204000053039865802BR5925JARDSON DOS SANTOS PEREIR6009SAO PAULO62140510sTh0SROYwZ6304DF37';
+    navigator.clipboard.writeText(pixKey).then(()=>{ alert("Chave PIX copiada com sucesso!"); });
+}
+
+function sendWhatsApp(){
+    const today = new Date();
+    const dataPedido = today.toLocaleDateString('pt-BR');
+    const horaPedido = today.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+
+    let msg = `🚀 *NOVO PEDIDO - JARDSON IMPORTS*\n\n📅 *DATA DO PEDIDO:* ${dataPedido}\n⏰ *HORÁRIO:* ${horaPedido}\n🆔 *Nº DO PEDIDO:* #${Math.floor(Math.random()*9000+1000)}\n\n📦 *ITENS DO PEDIDO:*\n`;
+    cart.forEach(p=>{ msg += `• Produto: ${p.name}\n  └ Quantidade: 1\n  └ Valor Unitário: R$ ${p.price.toLocaleString('pt-BR')}\n\n`; });
+    msg += `💳 *FORMA DE PAGAMENTO:* PIX\n🎟️ *CUPOM APLICADO:*\n💸 *DESCONTO:*\n\n🚚 *ENTREGA*\n📍 Endereço: ${user.rua}, ${user.num}\n🏘️ Bairro: ${user.bairro}\n🏙️ Cidade/UF: Laranjal do Jari / AP\n📮 CEP: 68920-000\n🔍 Referência:\n📦 Tipo de Entrega: Motoboy (Grátis)\n\n`;
+    const total = cart.reduce((a,b)=>a+b.price,0);
+    msg += `💰 *RESUMO FINANCEIRO*\n🛒 Subtotal: R$ ${total.toLocaleString('pt-BR')}\n🚚 Frete: R$ 0\n💸 Desconto:\n💰 *TOTAL A PAGAR:* R$ ${total.toLocaleString('pt-BR')}\n\n👤 *DADOS DO CLIENTE*\nNome: ${user.nome}\n📱 WhatsApp: (Cliente enviando...)\n\n📸 *STATUS DO PAGAMENTO:*\n📸 Comprovante enviado\n\n🙏 *OBRIGADO PELA PREFERÊNCIA!*\n*JARDSON IMPORTS – QUALIDADE E CONFIANÇA*`;
+    
+    const waLink = `https://wa.me/5596991189596?text=${encodeURIComponent(msg)}`;
+    window.open(waLink);
+}
+
+// USUÁRIO
 document.getElementById('user-form').addEventListener('submit', function(e){
     e.preventDefault();
-    const nome=document.getElementById('reg-nome').value.trim();
-    const rua=document.getElementById('reg-rua').value.trim();
-    const num=document.getElementById('reg-num').value.trim();
-    const bairro=document.getElementById('reg-bairro').value.trim();
-    const ref=document.getElementById('reg-ref').value.trim();
-    const photo=document.getElementById('profile-pic')?.src || '';
-    if(!nome || !rua || !num || !bairro){ alert("Preencha todos os campos obrigatórios!"); return; }
-    user={nome,rua,num,bairro,ref,photo};
-    localStorage.setItem('jardson_db',JSON.stringify(user));
-    alert("Cadastro salvo com sucesso!");
+    user = {
+        nome: document.getElementById('reg-nome').value,
+        rua: document.getElementById('reg-rua').value,
+        num: document.getElementById('reg-num').value,
+        bairro: document.getElementById('reg-bairro').value
+    };
+    localStorage.setItem('jardson_db', JSON.stringify(user));
     updateUserModal();
     closeAllModals();
 });
+
 function updateUserModal(){
-    if(!user) return;
     document.getElementById('user-logged').classList.remove('hidden');
     document.getElementById('user-form').classList.add('hidden');
-    document.getElementById('user-name-display').innerText=user.nome;
-    document.getElementById('user-addr-display').innerText=`${user.rua}, Nº ${user.num}, ${user.bairro}`;
-    document.getElementById('user-ref-display').innerText=user.ref?`Ref: ${user.ref}`:'';
-    if(user.photo) document.getElementById('profile-pic').src=user.photo;
+    document.getElementById('user-name-display').innerText = user.nome;
+    document.getElementById('user-addr-display').innerText = `${user.rua}, ${user.num}`;
 }
-function logout(){ localStorage.removeItem('jardson_db'); user=null; document.getElementById('user-logged').classList.add('hidden'); document.getElementById('user-form').classList.remove('hidden'); }
 
-// ---------- FOTO PERFIL ----------
-document.getElementById('photo-input').addEventListener('change', function(e){
-    const reader=new FileReader();
-    reader.onload=function(){ document.getElementById('profile-pic').src=reader.result; };
-    reader.readAsDataURL(e.target.files[0]);
-});
+function logout(){ localStorage.removeItem('jardson_db'); user=null; location.reload(); }
 
-// ---------- INIT ----------
+// INIT
+updateCart();
 renderProducts();
 if(user) updateUserModal();
 </script>
+
 </body>
 </html>
