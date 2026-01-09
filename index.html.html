@@ -8,90 +8,24 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     background: #f8f9fa;
     color: #1a1a1a;
     padding-bottom: 100px;
 }
-
-.glass-header {
-    background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(10px);
-}
-.product-card {
-    background: white;
-    border-radius: 16px;
-    border: 1px solid rgba(0,0,0,0.05);
-    transition: 0.3s;
-    cursor: pointer;
-    position: relative;
-}
+.glass-header { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); }
+.product-card { background: white; border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); transition: 0.3s; cursor: pointer; position: relative; }
 .product-card:active { transform: scale(0.96); }
-.category-pill {
-    white-space: nowrap;
-    padding: 8px 16px;
-    border-radius: 20px;
-    background: white;
-    font-size: 12px;
-    font-weight: 700;
-    border: 1px solid #eee;
-    transition: 0.3s;
-    flex-shrink: 0;
-    cursor: pointer;
-}
+.category-pill { white-space: nowrap; padding: 8px 16px; border-radius: 20px; background: white; font-size: 12px; font-weight: 700; border: 1px solid #eee; transition: 0.3s; flex-shrink: 0; cursor: pointer; }
 .category-pill.active { background: #ee4d2d; color: white; border-color: #ee4d2d; }
-
-.side-modal {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    height: 100%;
-    background: white;
-    z-index: 200;
-    transition: 0.4s;
-    overflow-y: auto;
-}
+.side-modal { position: fixed; top: 0; right: -100%; width: 100%; height: 100%; background: white; z-index: 200; transition: 0.4s; overflow-y: auto; }
 .side-modal.active { right: 0; }
 @media (min-width: 768px) { .side-modal { width: 420px; box-shadow: -10px 0 30px rgba(0,0,0,0.1); } }
-
-.nav-bottom {
-    position: fixed;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 92%;
-    max-width: 450px;
-    background: #1a1a1a;
-    border-radius: 25px;
-    display: flex;
-    padding: 12px;
-    z-index: 100;
-}
-.nav-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #777;
-    font-size: 10px;
-    cursor: pointer;
-}
+.nav-bottom { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 450px; background: #1a1a1a; border-radius: 25px; display: flex; padding: 12px; z-index: 100; }
+.nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; color: #777; font-size: 10px; cursor: pointer; }
 .nav-item.active { color: white; }
-.discount-tag {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    background: #ff4d4d;
-    color: white;
-    padding: 3px 7px;
-    border-radius: 6px;
-    font-size: 9px;
-    font-weight: 800;
-    z-index: 10;
-}
+.discount-tag { position: absolute; top: 8px; left: 8px; background: #ff4d4d; color: white; padding: 3px 7px; border-radius: 6px; font-size: 9px; font-weight: 800; z-index: 10; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 </style>
 </head>
@@ -101,7 +35,7 @@ body {
 <header class="glass-header sticky top-0 z-50 border-b border-gray-100 px-5 py-4 flex justify-between items-center">
     <div>
         <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Laranjal do Jari</p>
-        <h1 class="text-3xl font-extrabold tracking-tighter">JARDSON<span class="text-[#ee4d2d]">IMPORTS</span></h1>
+        <h1 class="text-4xl font-extrabold tracking-tighter">JARDSON<span class="text-[#ee4d2d]">IMPORTS</span></h1>
     </div>
     <button onclick="openModal('cart-modal')" class="relative p-2 bg-gray-100 rounded-full">
         <i class="fa-solid fa-cart-shopping"></i>
@@ -109,7 +43,7 @@ body {
     </button>
 </header>
 
-<div class="flex overflow-x-auto gap-2 max-w-5xl mx-auto pb-4 category-scroll justify-start md:justify-center px-4 mt-4" data-aos="fade-up">
+<div class="flex overflow-x-auto gap-2 max-w-5xl mx-auto pb-4 category-scroll justify-start md:justify-center px-4 mt-4">
     <span onclick="filterCategory('all', this)" class="category-pill active">Todos</span>
     <span onclick="filterCategory('iphone', this)" class="category-pill">iPhone</span>
     <span onclick="filterCategory('samsung', this)" class="category-pill">Samsung</span>
@@ -128,7 +62,6 @@ body {
 
 <footer class="bg-white border-t border-gray-100 pt-10 pb-32 px-6 mt-10">
     <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        
         <div>
             <h3 class="text-lg font-black tracking-tighter mb-4 text-gray-800">JARDSON<span class="text-[#ee4d2d]">IMPORTS</span></h3>
             <p class="text-gray-500 text-sm leading-relaxed">
@@ -171,10 +104,10 @@ body {
                 © 2026 JARDSON IMPORTS. Todos os direitos reservados.
             </p>
         </div>
-
     </div>
 </footer>
 
+<!-- MODAL USUÁRIO -->
 <div id="profile-modal" class="side-modal">
     <div class="p-6">
         <button onclick="closeAllModals()" class="mb-6"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -203,6 +136,7 @@ body {
     </div>
 </div>
 
+<!-- MODAL CARRINHO -->
 <div id="cart-modal" class="side-modal flex flex-col">
     <div class="p-6 border-b flex justify-between items-center bg-white">
         <button onclick="closeAllModals()"><i class="fa-solid fa-chevron-left"></i></button>
@@ -221,6 +155,15 @@ body {
         <button onclick="finishOrder()" class="w-full py-4 bg-green-500 text-white rounded-2xl font-bold flex items-center justify-center gap-2">
             <i class="fa-brands fa-whatsapp text-xl"></i> FINALIZAR NO WHATSAPP
         </button>
+        <button onclick="showPix()" class="w-full py-4 mt-2 bg-yellow-500 text-black rounded-2xl font-bold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-qrcode"></i> PAGAR COM PIX
+        </button>
+        <div id="pix-div" class="hidden mt-4 text-center">
+    <img src="https://generator.qrcodefacil.com/qrcodes/static-99f92ef4525d0800f680831097f0145a.svg" alt="PIX QR" class="mx-auto mb-2">
+    <input type="text" id="pix-code" value="00020126500014BR.GOV.BCB.PIX0128jardsonimportsrico@gmail.com5204000053039865802BR5925JARDSON DOS SANTOS PEREIR6009SAO PAULO62140510sTh0SROYwZ6304DF37" readonly class="w-full p-3 text-sm border rounded-lg text-center bg-gray-100 cursor-pointer" onclick="this.select(); document.execCommand('copy'); alert('PIX copiado!')">
+    <p class="mt-2 text-sm font-bold">Clique no código para copiar</p>
+</div>
+
     </div>
 </div>
 
@@ -231,7 +174,6 @@ body {
 </nav>
 
 <script>
-// ---------- PRODUTOS ----------
 const products = [
             // IPHONES
             { id: 1, name: "Apple iPhone 17 Pro Max (256 GB) Laranja cósmico", price: 10099, promo: true, category: "iphone", image: "https://m.media-amazon.com/images/I/51nj2ICJyeL._AC_SX342_.jpg" },
@@ -325,6 +267,7 @@ const products = [
             { id: 64, name: "Micro-ondas midea 20L Prata Porta Espelhada", price: 699, promo: false, category: "outros", image: "https://m.media-amazon.com/images/I/61FevnWBKmL._AC_SX679_.jpg" },
             { id: 65, name: "Micro-ondas philco 25L Prata Porta Espelhada", price: 899, promo: false, category: "outros", image: "https://m.media-amazon.com/images/I/617WMTv2+wL._AC_SX679_.jpg" },
             { id: 66, name: "Panela de Pressão Elétrica 6L Digit Mideaa", price: 599, promo: false, category: "outros", image: "https://m.media-amazon.com/images/I/614G6tkffwL._AC_SX679_.jpg" },
+
 ];
 
 // ---------- CARRINHO ----------
@@ -338,13 +281,14 @@ function renderProducts(cat='all'){
     const vitrine = document.getElementById('vitrine');
     const filtered = cat==='all'? products : products.filter(p=>p.category===cat);
     vitrine.innerHTML = filtered.map(p => `
-    <div class="product-card p-3" onclick="addToCart(${p.id})">
-        ${p.promo?'<span class="discount-tag">PROMOÇÃO</span>':''}
-        <img src="${p.image}" class="w-full aspect-square object-contain mb-3 rounded-lg">
-        <h3 class="text-[10px] font-bold text-gray-700 h-8 line-clamp-2 leading-tight">${p.name}</h3>
-        <p class="text-sm font-black text-[#ee4d2d] mt-2">R$ ${p.price.toLocaleString('pt-BR')}</p>
-        <button class="w-full mt-2 py-2 bg-black text-white text-[9px] font-bold rounded-lg uppercase">Adicionar</button>
-    </div>`).join('');
+        <div class="product-card p-3" onclick="addToCart(${p.id})">
+            ${p.promo?'<span class="discount-tag">PROMOÇÃO</span>':''}
+            <img src="${p.image}" class="w-full aspect-square object-contain mb-3 rounded-lg">
+            <h3 class="text-[10px] font-bold text-gray-700 h-8 line-clamp-2 leading-tight">${p.name}</h3>
+            <p class="text-sm font-black text-[#ee4d2d] mt-2">R$ ${p.price.toLocaleString('pt-BR')}</p>
+            <button class="w-full mt-2 py-2 bg-black text-white text-[9px] font-bold rounded-lg uppercase">Adicionar</button>
+        </div>
+    `).join('');
 }
 
 // ---------- FILTRO ----------
@@ -363,95 +307,83 @@ function updateCart(){
     const itemsDiv = document.getElementById('cart-items');
     itemsDiv.innerHTML = cart.length===0?'<div class="text-center py-10 text-gray-400">Sacola vazia</div>':
     cart.map((p,i)=>`<div class="flex items-center gap-3 bg-gray-50 p-3 rounded-xl mb-2">
-    <img src="${p.image}" class="w-10 h-10 object-contain rounded bg-white">
-    <div class="flex-1"><h4 class="text-[10px] font-bold">${p.name}</h4><p class="text-[#ee4d2d] font-bold text-xs">R$ ${p.price.toLocaleString('pt-BR')}</p></div>
-    <button onclick="removeFromCart(${i})" class="text-gray-300 px-2"><i class="fa-solid fa-trash"></i></button>
+        <img src="${p.image}" class="w-10 h-10 object-contain rounded bg-white">
+        <div class="flex-1"><h4 class="text-[10px] font-bold">${p.name}</h4><p class="text-xs text-[#ee4d2d]">R$ ${p.price.toLocaleString('pt-BR')}</p></div>
+        <button onclick="removeFromCart(${i})" class="text-red-500"><i class="fa-solid fa-xmark"></i></button>
     </div>`).join('');
-
-    const sub = cart.reduce((s,p)=>s+p.price,0);
-    document.getElementById('sub-val').innerText=`R$ ${sub.toLocaleString('pt-BR')}`;
-    document.getElementById('desc-val').innerText=`- R$ ${discount.toLocaleString('pt-BR')}`;
-    document.getElementById('total-val').innerText=`R$ ${(sub-discount).toLocaleString('pt-BR')}`;
+    calculateTotal();
 }
 
 // ---------- CUPOM ----------
-function applyCoupon(){
-    const input = document.getElementById('coupon-input').value.trim().toUpperCase();
-    if(input==="JARDSON25"){ discount=25; activeCoupon="JARDSON25"; alert("Cupom Aplicado!"); }
-    else{ discount=0; activeCoupon="Nenhum"; alert("Cupom Inválido."); }
-    updateCart();
+function applyCoupon(){ 
+    const cup = document.getElementById('coupon-input').value.trim();
+    if(cup.toUpperCase()==='JARDSON25'){ discount=0.25; activeCoupon='JARDSON25'; alert("Cupom aplicado: 25% OFF"); }
+    else { discount=0; activeCoupon="Nenhum"; alert("Cupom inválido"); }
+    calculateTotal();
 }
 
-// ---------- FINALIZAR PEDIDO ----------
+// ---------- TOTAL ----------
+function calculateTotal(){
+    const sub = cart.reduce((a,b)=>a+b.price,0);
+    const desc = Math.floor(sub*discount);
+    const total = sub-desc;
+    document.getElementById('sub-val').innerText = `R$ ${sub.toLocaleString('pt-BR')}`;
+    document.getElementById('desc-val').innerText = `- R$ ${desc.toLocaleString('pt-BR')}`;
+    document.getElementById('total-val').innerText = `R$ ${total.toLocaleString('pt-BR')}`;
+}
+
+// ---------- FINALIZAR WHATSAPP ----------
 function finishOrder(){
-    if(!user) return openModal('profile-modal');
-    if(cart.length===0) return alert("Sacola vazia!");
-    
-    const agora = new Date();
-    const subtotal = cart.reduce((s,p)=>s+p.price,0);
-    const total = subtotal-discount;
-    const itens = cart.map(p=>`• ${p.name}`).join('\n');
-    const foto = user.photo ? `\n📸 Foto do Cliente: ${user.photo}` : '';
-
-    const mensagem = `🚀 *NOVO PEDIDO - JARDSON IMPORTS*${foto}
-
-📅 *DATA:* ${agora.toLocaleDateString('pt-BR')} | ${agora.toLocaleTimeString('pt-BR',{hour:'2-digit', minute:'2-digit'})}
-🆔 *Nº:* #${Math.floor(1000+Math.random()*9000)}
-
-📦 *ITENS:*
-${itens}
-
-💳 *PAGAMENTO:* PIX
-🎟️ *CUPOM:* ${activeCoupon}
-💸 *DESCONTO:* R$ ${discount.toLocaleString('pt-BR')}
-
-🚚 *ENTREGA*
-📍 Endereço: ${user.rua}, Nº ${user.num}
-🏘️ Bairro: ${user.bairro}
-🏙️ Cidade: Laranjal do Jari / AP
-🔍 Ref: ${user.ref}
-
-💰 *TOTAL:* R$ ${total.toLocaleString('pt-BR')}
-
-👤 *CLIENTE:* ${user.nome}
-*ENVIE O COMPROVANTE!*`;
-
-    window.open(`https://api.whatsapp.com/send?phone=5596991189596&text=${encodeURIComponent(mensagem)}`);
+    if(!user){ alert("Preencha seus dados antes de finalizar."); openModal('profile-modal'); return; }
+    if(cart.length===0){ alert("Sua sacola está vazia."); return; }
+    let msg=`🚀 *NOVO PEDIDO - JARDSON IMPORTS*\n\n📦 *ITENS:*\n`;
+    cart.forEach(p=>{ msg+=`- ${p.name} - R$ ${p.price.toLocaleString('pt-BR')}\n`; });
+    msg+=`\n💰 *TOTAL:* ${document.getElementById('total-val').innerText}\n🎟️ *CUPOM:* ${activeCoupon}\n----------------------------\n👤 *CLIENTE:* ${user.nome}\n📍 *ENDEREÇO:* ${user.rua}, Nº ${user.num}\n🏘️ *BAIRRO:* ${user.bairro}\n🔍 *REF:* ${user.ref || ''}`;
+    window.open(`https://wa.me/5596991189596?text=${encodeURIComponent(msg)}`);
 }
 
-// ---------- CADASTRO ----------
-document.getElementById('user-form').addEventListener('submit',function(e){
-    e.preventDefault();
-    user={
-        nome: document.getElementById('reg-nome').value,
-        rua: document.getElementById('reg-rua').value,
-        num: document.getElementById('reg-num').value,
-        bairro: document.getElementById('reg-bairro').value,
-        ref: document.getElementById('reg-ref').value || "Não informado",
-        photo: user?.photo || ""
-    };
-    localStorage.setItem('jardson_db',JSON.stringify(user));
-    updateUI();
-});
-
-// ---------- ATUALIZA UI ----------
-function updateUI(){
-    if(user){
-        document.getElementById('user-form').classList.add('hidden');
-        document.getElementById('user-logged').classList.remove('hidden');
-        document.getElementById('user-name-display').innerText = user.nome;
-        document.getElementById('user-addr-display').innerText = `${user.rua}, Nº ${user.num} - ${user.bairro}`;
-        document.getElementById('user-ref-display').innerText = `Referência: ${user.ref}`;
-        if(user.photo) document.getElementById('profile-pic').src = user.photo;
-    }
-}
-function logout(){ if(confirm("Deseja editar seus dados?")){ localStorage.removeItem('jardson_db'); user=null; updateUI(); document.getElementById('user-form').classList.remove('hidden'); document.getElementById('user-logged').classList.add('hidden'); } }
+// ---------- MODAIS ----------
 function openModal(id){ document.getElementById(id).classList.add('active'); }
 function closeAllModals(){ document.querySelectorAll('.side-modal').forEach(m=>m.classList.remove('active')); }
+function showPix(){ document.getElementById('pix-div').classList.toggle('hidden'); }
 
-updateCart();
-updateUI();
+// ---------- CADASTRO ----------
+document.getElementById('user-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const nome=document.getElementById('reg-nome').value.trim();
+    const rua=document.getElementById('reg-rua').value.trim();
+    const num=document.getElementById('reg-num').value.trim();
+    const bairro=document.getElementById('reg-bairro').value.trim();
+    const ref=document.getElementById('reg-ref').value.trim();
+    const photo=document.getElementById('profile-pic')?.src || '';
+    if(!nome || !rua || !num || !bairro){ alert("Preencha todos os campos obrigatórios!"); return; }
+    user={nome,rua,num,bairro,ref,photo};
+    localStorage.setItem('jardson_db',JSON.stringify(user));
+    alert("Cadastro salvo com sucesso!");
+    updateUserModal();
+    closeAllModals();
+});
+function updateUserModal(){
+    if(!user) return;
+    document.getElementById('user-logged').classList.remove('hidden');
+    document.getElementById('user-form').classList.add('hidden');
+    document.getElementById('user-name-display').innerText=user.nome;
+    document.getElementById('user-addr-display').innerText=`${user.rua}, Nº ${user.num}, ${user.bairro}`;
+    document.getElementById('user-ref-display').innerText=user.ref?`Ref: ${user.ref}`:'';
+    if(user.photo) document.getElementById('profile-pic').src=user.photo;
+}
+function logout(){ localStorage.removeItem('jardson_db'); user=null; document.getElementById('user-logged').classList.add('hidden'); document.getElementById('user-form').classList.remove('hidden'); }
+
+// ---------- FOTO PERFIL ----------
+document.getElementById('photo-input').addEventListener('change', function(e){
+    const reader=new FileReader();
+    reader.onload=function(){ document.getElementById('profile-pic').src=reader.result; };
+    reader.readAsDataURL(e.target.files[0]);
+});
+
+// ---------- INIT ----------
 renderProducts();
+if(user) updateUserModal();
 </script>
 </body>
 </html>
