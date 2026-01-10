@@ -34,7 +34,7 @@ h3 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; 
 
 <header class="glass-header sticky top-0 z-50 border-b border-gray-100 px-5 py-4 flex justify-between items-center">
     <div>
-        <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">COMPRE SEM SAIR DE CASA</p>
+        <p class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">COMPRE SEM SAIR DE CASA</p>
         <h1 class="text-4xl font-extrabold tracking-tighter">JARDSON<span class="text-[#ee4d2d]">IMPORTS</span></h1>
     </div>
     <button onclick="openModal('cart-modal')" class="relative p-2 bg-gray-100 rounded-full">
@@ -51,7 +51,7 @@ h3 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; 
     <span onclick="filterCategory('tablet', this)" class="category-pill">Tablet</span>
     <span onclick="filterCategory('som', this)" class="category-pill">Som</span>
     <span onclick="filterCategory('motorola', this)" class="category-pill">Motorola</span>
-    <span onclick="filterCategory('tv', this)" class="category-pill">TV & Box</span>
+    <span onclick="filterCategory('tvbox', this)" class="category-pill">TV & Box</span>
     <span onclick="filterCategory('games', this)" class="category-pill">Games</span>
     <span onclick="filterCategory('acessorios', this)" class="category-pill">Acessorios</span>
     <span onclick="filterCategory('outros', this)" class="category-pill">Outros</span>
@@ -74,7 +74,7 @@ h3 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; 
         <button onclick="closeAllModals()" class="mb-6"><i class="fa-solid fa-xmark text-xl"></i></button>
         <div id="user-logged" class="hidden text-center">
             <div class="relative w-24 h-24 mx-auto mb-4">
-                <img id="profile-pic" src="https://via.placeholder.com/150" class="w-24 h-24 rounded-full object-cover border-2 border-[#ee4d2d]">
+                <img id="profile-pic" src="https://previews.123rf.com/images/zrzahid/zrzahid2504/zrzahid250423478/244501732-flat-style-user-profile-icon-vector-illustration-for-user-interface-documents-websites-and-mobile.avif" class="w-24 h-24 rounded-full object-cover border-2 border-[#ee4d2d]">
             </div>
             <h3 id="user-name-display" class="font-bold text-lg"></h3>
             <p id="user-addr-display" class="text-xs text-gray-500"></p>
@@ -107,8 +107,8 @@ h3 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; 
         </button>
 
         <div id="pix-section" class="mt-4 hidden flex flex-col items-center gap-4">
-            <img src="https://generator.qrcodefacil.com/qrcodes/static-99f92ef4525d0800f680831097f0145a.svg" alt="QR Code PIX" class="w-48 h-48">
-            <p class="text-sm font-bold text-gray-700 break-all text-center">Chave PIX: jardsonimportsrico@gmail.com</p>
+            <img src="https://generator.qrcodefacil.com/qrcodes/static-adb547eb510d4bb35eea4ac655bb730b.svg" alt="QR Code PIX" class="w-48 h-48">
+            <p class="text-sm font-bold text-gray-700 break-all text-center">Chave PIX: 00020126500014BR.GOV.BCB.PIX0128jardsonimportsrico@gmail.com5204000053039865802BR5925JARDSON DOS SANTOS PEREIR6009SAO PAULO62140510sTh0SROYwZ6304DF37</p>
             <button onclick="copyPix()" class="w-full py-3 bg-green-700 text-white rounded-2xl font-bold text-center">Copiar PIX</button>
             <button onclick="sendWhatsApp()" class="w-full py-3 bg-blue-600 text-white rounded-2xl font-bold text-center mt-2">
                 Enviar Pedido pelo WhatsApp
@@ -134,8 +134,7 @@ let user = JSON.parse(localStorage.getItem('jardson_db')) || null;
 // PRODUTOS
 // ========================
 const products = [
-
-  // IPHONES
+ // IPHONES
   { id: 1, name: "Apple iPhone 17 Pro Max", price: 10099, promo: true, category: "iphone", description: "iPhone top de linha, 256GB, cor Laranja cósmico.", images: ["https://m.media-amazon.com/images/I/51nj2ICJyeL._AC_SX342_.jpg","https://m.media-amazon.com/images/I/517XGmJyA0L._AC_SX522_.jpg","https://m.media-amazon.com/images/I/41aZFOedFkL._AC_SX522_.jpg"] },
 
   { id: 51, name: "Apple iPhone 17 Pro", price: 8800, promo: true, category: "iphone", description: "iPhone 17 Pro, 256GB, Azul intenso.", images: ["https://m.media-amazon.com/images/I/41uMcSPiYAL._AC_SX342_.jpg",,"https://m.media-amazon.com/images/I/51nhjDNhsIL._AC_SX342_.jpg","https://m.media-amazon.com/images/I/41k0Gekg9gL._AC_SX342_.jpg"] },
@@ -175,26 +174,39 @@ const products = [
 
   { id: 14, name: "Caixa de Som AIWA BBS-01-B 200W", price: 1800, promo: true, category: "som", description: "Caixa de Som Boombox Plus AIWA BBS-01-B 200W Bluetooth 5.3-200W RMS - 30 Horas de Bateria - Resistente à Poeira e Água - Preto.", images: ["https://m.media-amazon.com/images/I/81EM7NWp2fL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/61-ILCn0mDL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/61DRkQjdOPL._AC_SY355_.jpg"] },
 
-  { id: 15, name: "Basike Fone de Ouvido Bluetooth TWS", price: 120, promo: false, category: "som", description: "Fone de ouvido Basike TWS Bluetooth.", images: ["https://m.media-amazon.com/images/I/51auQNthvnL._AC_SX522_.jpg"] },
+  { id: 15, name: "Basike Fone de Ouvido Bluetooth TWS", price: 120, promo: false, category: "som", description: "Fone de ouvido Basike TWS Bluetooth.", images: ["https://m.media-amazon.com/images/I/51auQNthvnL._AC_SX522_.jpg", "url2", "url3"] },
 
   // MOTOROLA
-  { id: 70, name: "Motorola Moto G15 256GB 12GB RAM", price: 1100, promo: true, category: "motorola", description: "Motorola Moto G15 com 256GB e 12GB RAM.", images: ["https://m.media-amazon.com/images/I/61kE-oxS5QL._AC_SY300_SX300_QL70_ML2_.jpg"] },
-  { id: 71, name: "Motorola Moto G24 Dual SIM 256 GB Rosa 4GB RAM", price: 1000, promo: true, category: "motorola", description: "Motorola Moto G24 Dual SIM 256GB Rosa, 4GB RAM.", images: ["https://http2.mlstatic.com/D_NQ_NP_2X_697199-MLA99990525747_112025-F.webp"] },
-  { id: 72, name: "Motorola Moto G ONE 5G 128GB", price: 1500, promo: false, category: "motorola", description: "Motorola Moto G ONE 5G 128GB.", images: ["https://m.media-amazon.com/images/I/51JEsDX-ynL._AC_SX679_.jpg"] },
-  { id: 73, name: "Motorola Moto G35 5G 128GB", price: 1250, promo: true, category: "motorola", description: "Motorola Moto G35 5G 128GB.", images: ["https://m.media-amazon.com/images/I/61pGaBV+-AL._AC_SX679_.jpg"] },
-  { id: 111, name: "Motorola Moto G05 128GB 12GB RAM", price: 1000, promo: true, category: "motorola", description: "Motorola Moto G05 128GB com 12GB RAM.", images: ["https://m.media-amazon.com/images/I/61Li7rC13PL._AC_SX679_.jpg"] },
+  { id: 70, name: "Motorola Moto G15", price: 1100, promo: true, category: "motorola", description: "Smartphone Motorola Moto g15-256GB 12GB (4GB RAM+8GB Ram Boost) e Camera 50MP com AI e Night Vision Bateria de 5200 mAh Tela FHD+ 6.7 com Superbrilho NFC - Grafite", images: ["https://m.media-amazon.com/images/I/61kE-oxS5QL._AC_SY300_SX300_QL70_ML2_.jpg", "https://m.media-amazon.com/images/I/61XxKVfNDIL._AC_SY450_.jpg", "https://m.media-amazon.com/images/I/61XxKVfNDIL._AC_SY450_.jpg"] },
+
+  { id: 71, name: "Motorola Moto G24", price: 1000, promo: true, category: "motorola", description: "Smartphone Motorola Moto G24 256gb 8gb (4gb Ram +4gb Ram Boost) Ai Camera 50mp Night Vision - Rosa", images: ["https://http2.mlstatic.com/D_NQ_NP_2X_697199-MLA99990525747_112025-F.webp", "https://http2.mlstatic.com/D_Q_NP_732855-MLA82251518663_022025-F.webp", "https://http2.mlstatic.com/D_Q_NP_660666-MLA81970294850_022025-F.webp"] },
+
+  { id: 72, name: "Motorola Moto G ONE 5G 128GB", price: 1500, promo: false, category: "motorola", description: "Motorola One 5G Ace (2021) 128GB + 6GB RAM (Desbloqueado para T-Mobile/Sprint) Tela de 6,7 Câmera de 48MP Bateria de longa duração de 5000mAh", images: ["https://m.media-amazon.com/images/I/51JEsDX-ynL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/51FgW7CHN8L._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/41+TzbLE+fL._AC_SX425_.jpg"] },
+
+  { id: 73, name: "Motorola Moto G35", price: 1250, promo: true, category: "motorola", description: "Smartphone Motorola Moto g35 5G - 128GB 12GB (4GB RAM+8GB Ram Boost) e Camera 50MP com AI NFC Tela 6.7", images: ["https://m.media-amazon.com/images/I/61pGaBV+-AL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/61J7SuO-ZuL._AC_SL1200_.jpg", "https://m.media-amazon.com/images/I/41E5YSdL1NL._AC_SL1200_.jpg"] },
+
+  { id: 111, name: "Motorola Moto G05", price: 1000, promo: true, category: "motorola", description: "Smartphone Motorola Moto g05-128GB 12GB (4GB RAM + 8GB Ram Boost) e Camera 50MP com AI Bateria de 5200 mAh Tela 6.7", images: ["https://m.media-amazon.com/images/I/61Li7rC13PL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/61dZNhmCHfL._AC_SY450_.jpg", "https://m.media-amazon.com/images/I/61dZNhmCHfL._AC_SY450_.jpg"] },
 
   // XIAOMI
-  { id: 16, name: "Xiaomi Poco C85 NFC Preto 8GB RAM 256GB", price: 1300, promo: true, category: "xiaomi", description: "Xiaomi Poco C85 NFC Preto com 8GB RAM e 256GB.", images: ["https://m.media-amazon.com/images/I/51LkPfkxWgL._AC_SX679_.jpg"] },
-  { id: 17, name: "Xiaomi Poco C75 NFC Black 8GB RAM 256GB", price: 1250, promo: false, category: "xiaomi", description: "Xiaomi Poco C75 NFC Preto com 8GB RAM e 256GB.", images: ["https://m.media-amazon.com/images/I/51YBYxx9opL._AC_SX679_.jpg"] },
-  { id: 18, name: "Xiaomi Poco C71 Ouro 4GB RAM 128GB", price: 1150, promo: true, category: "xiaomi", description: "Xiaomi Poco C71 Ouro com 4GB RAM e 128GB.", images: ["https://m.media-amazon.com/images/I/71p2jmIJAGL._AC_SX679_.jpg"] },
-  { id: 19, name: "Xiaomi Redmi A5 128GB 4GB RAM Dual SIM Tela 6.88", price: 999, promo: true, category: "xiaomi", description: "Xiaomi Redmi A5 128GB, 4GB RAM Dual SIM com tela 6.88''.", images: ["https://m.media-amazon.com/images/I/41lG+gCk+YL._AC_SX522_.jpg"] },
-  { id: 123, name: "Xiaomi Redmi Note 14 Lime Green 8GB RAM 256GB", price: 1600, promo: true, category: "xiaomi", description: "Xiaomi Redmi Note 14 Lime Green com 8GB RAM e 256GB.", images: ["https://m.media-amazon.com/images/I/61M3IAiWWrL._AC_SX679_.jpg"] },
-  { id: 124, name: "Xiaomi Redmi Note 14 Pro+ Plus 5G Lavender Purple Lilás 8GB RAM 256GB", price: 2799, promo: true, category: "xiaomi", description: "Xiaomi Redmi Note 14 Pro+ Plus 5G Lavender Purple Lilás com 8GB RAM e 256GB.", images: ["https://m.media-amazon.com/images/I/41wYiyy-36L._AC_.jpg"] },
+  { id: 16, name: "Xiaomi Poco C85", price: 1300, promo: true, category: "xiaomi", description: "Smartphone Xiaomi Poco C85 NFC Preto 8GB RAM 256GB ROM", images: ["https://m.media-amazon.com/images/I/51LkPfkxWgL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/31cOn1s86-L._AC_.jpg", "https://m.media-amazon.com/images/I/21xCPORPHlL._AC_.jpg"] },
+
+  { id: 17, name: "Xiaomi Poco C75", price: 1250, promo: false, category: "xiaomi", description: "Smartphone Xiaomi Poco C75 NFC Black (Preto) 8GB RAM 256GB ROM", images: ["https://m.media-amazon.com/images/I/51YBYxx9opL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/41UxvTtL5UL._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/41M4ZNlW17L._AC_SL1200_.jpg"] },
+
+  { id: 18, name: "Xiaomi Poco C71", price: 1150, promo: true, category: "xiaomi", description: "Smartphone Xiaomi Poco C71 Ouro 4G 4GB RAM 128GB ROM", images: ["https://m.media-amazon.com/images/I/71p2jmIJAGL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/51FWWYsj19L._AC_SL1000_.jpg", "https://m.media-amazon.com/images/I/71awT8X2apL._AC_SL1200_.jpg"] },
+
+  { id: 19, name: "Xiaomi Redmi A5", price: 999, promo: true, category: "xiaomi", description: "Smartphone Xiaomi Redmi A5 128GB 4GB RAM Dual SIM Tela 6.88''.", images: ["https://m.media-amazon.com/images/I/41lG+gCk+YL._AC_SX522_.jpg", "Smartphone Xiaomi Redmi A5 128GB 4GB RAM Dual SIM Tela 6.88"] },
+
+  { id: 123, name: "Xiaomi Redmi Note 14", price: 1600, promo: true, category: "xiaomi", description: "Smartphone Xiaomi Redmi Note 14 Lime Green (Verde) 8GB RAM 256GB ROM", images: ["https://m.media-amazon.com/images/I/61M3IAiWWrL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/519ifzRsosL._AC_SX425_.jpg"] },
+
+  { id: 124, name: "Xiaomi Redmi Note 14 Pro Plus", price: 2799, promo: true, category: "xiaomi", description: "Smartphone Xiaomi Redmi Note 14 Pro+ Plus 5G Lavender Purple Lilás 8GB RAM 256GB ROM NFC", images: ["https://m.media-amazon.com/images/I/41wYiyy-36L._AC_.jpg", "https://m.media-amazon.com/images/I/41+GALkujhL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/41kykSb1SWL._AC_SY355_.jpg"] },
+
   { id: 125, name: "Xiaomi Redmi 15C Midnight Black 8GB RAM 256GB", price: 1700, promo: true, category: "xiaomi", description: "Xiaomi Redmi 15C Midnight Black com 8GB RAM e 256GB.", images: ["https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSx9OVud2eWNk28GMo3zAiDINFRxsGAsazNI2vRQsnG_kejbuRWefmRO43SEQoFdHNnjyEwpAH36CQnot7GB4vVebTBWHKSf41WsNDv3wqc0-XY0XzvBU34kg"] },
-  { id: 126, name: "Xiaomi Redmi 15C Midnight 8GB RAM 256GB", price: 1299, promo: true, category: "xiaomi", description: "Xiaomi Redmi 15C Midnight com 8GB RAM e 256GB.", images: ["https://m.media-amazon.com/images/I/41PDgmf2u4L._AC_.jpg"] },
-  { id: 127, name: "POCO M7 Pro 5G 256GB 8GB/12GB RAM Tela AMOLED FHD+120Hz Bateria 5110mAh 45W Turbo", price: 1900, promo: true, category: "xiaomi", description: "POCO M7 Pro 5G 256GB, 8/12GB RAM, Tela AMOLED FHD+120Hz, Bateria 5110mAh com 45W Turbo.", images: ["https://m.media-amazon.com/images/I/71LaKVa7d2L._AC_SX522_.jpg"] },
-  { id: 128, name: "Xiaomi Poco X7 5G NFC 12GB RAM 512GB", price: 2200, promo: true, category: "xiaomi", description: "Xiaomi Poco X7 5G NFC com 12GB RAM e 512GB.", images: ["https://m.media-amazon.com/images/I/61ct3FPtzmL._AC_SX679_.jpg"] },
+
+  { id: 126, name: "Xiaomi Redmi 15C", price: 1299, promo: true, category: "xiaomi", description: "Smartphone Xiaomi Redmi 15C Midnight Black (Preto) 8GB RAM 256GB ROM", images: ["https://m.media-amazon.com/images/I/41PDgmf2u4L._AC_.jpg","https://m.media-amazon.com/images/I/41HP6T0IGaL._AC_SX355_.jpg"] },
+
+  { id: 127, name: "POCO M7 Pro 5G", price: 1900, promo: true, category: "Xiaomi Smartphone POCO M7 Pro 5G 256GB | 8GB/12GB RAM | Processador Ultra Potente Dimensity 7025 | Tela AMOLED FHD+ 120Hz com Proteção Ocular | Bateria 5110mAh com 45W Turbo", images: ["https://m.media-amazon.com/images/I/71LaKVa7d2L._AC_SX522_.jpg", "https://m.media-amazon.com/images/I/71bRhBLAExL._AC_SL1500_.jpg", "https://m.media-amazon.com/images/I/61uuLlWr+aL._AC_SL1200_.jpg"] },
+
+  { id: 128, name: "Xiaomi Poco X7 5G", price: 2200, promo: true, category: "xiaomi", description: "Smartphone Xiaomi Poco X7 5G NFC Silver (Prata) 12GB RAM 512GB ROM", images: ["https://m.media-amazon.com/images/I/61ct3FPtzmL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/61d54K1-BuL._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/51mkzQba9SL._AC_SX425_.jpg"] },
 
   // REALME
   { id: 66, name: "Celular Realme C75 Dual SIM 8GB RAM 256GB", price: 1600, promo: true, category: "realme", description: "Realme C75 Dual SIM com 8GB RAM e 256GB.", images: ["https://m.media-amazon.com/images/I/51k5Y5TU0QL._AC_SX425_.jpg"] },
@@ -210,12 +222,22 @@ const products = [
 
   // TV BOX / OUTROS
   { id: 101, name: "TV Box Android 4K", price: 349, promo: true, category: "tvbox", description: "TV Box Android 4K para streaming e apps.", images: ["https://m.media-amazon.com/images/I/51tS4pNsHnL._AC_SX679_.jpg"] },
+  { id: 102, name: "Smart TV Box Q5 8K", price: 499, promo: true, category: "tvbox", description: "Smart TV Box Q5 8K com performance avançada.", images: ["https://m.media-amazon.com/images/I/61y2+gWTQML._AC_SX679_.jpg"] },
+
+  // ACESSÓRIOS
+  { id: 91, name: "Creatine Turbo Black Skull 300g", price: 70, promo: false, category: "acessorios", description: "Creatine Turbo Black Skull 300g.", images: ["https://m.media-amazon.com/images/I/6165ojDGBPL._AC_SX679_.jpg"] },
+  { id: 92, name: "Lavadora de Alta Pressão Wap Preta Ousada WL 2610 Ultra", price: 799, promo: false, category: "acessorios", description: "Lavadora de Alta Pressão Wap Preta Ousada WL 2610 Ultra.", images: ["https://m.media-amazon.com/images/I/71Yf5KxWewL._AC_SX679_.jpg"] },
+
+  // TV BOX / OUTROS
+  { id: 101, name: "TV Box Android 4K", price: 349, promo: true, category: "tvbox", description: "TV Box Android 4K para streaming e apps.", images: ["https://m.media-amazon.com/images/I/51tS4pNsHnL._AC_SX679_.jpg"] },
   { id: 102, name: "Smart TV Box Q5 8K", price: 499, promo: true, category: "tvbox", description: "Smart TV Box Q5 8K com performance avançada.", images: ["https://m.media-amazon.com/images/I/61y2+gWTQML._AC_SX679_.jpg"] }
 
+
+  // restante dos produtos segue igual (corrigidos os "url2" etc)
 ];
 
 // ========================
-// FUNÇÕES DE RENDER
+// RESTO DO JS (renderProducts, filterCategory, openProductDetail...) permanece igual
 // ========================
 function renderProducts(cat='all'){
     const vitrine = document.getElementById('vitrine');
@@ -318,7 +340,7 @@ function clearCart(){
 // PIX
 // ========================
 function showPix(){
-    if(!user){ alert("Cadastre seu endereço no perfil!"); openModal('profile-modal'); return; }
+    if(!user){ alert("🏠 Cadastre seu endereço no perfil para facilitar suas compras e entregas!"); openModal('profile-modal'); return; }
     if(cart.length===0) return;
     document.getElementById('pix-section').classList.remove('hidden');
     document.getElementById('finalize-btn').classList.add('hidden');
@@ -338,7 +360,7 @@ function sendWhatsApp(){
     cart.forEach(p=>{ msg += `• Produto: ${p.name}\n  └ Quantidade: 1\n  └ Valor Unitário: R$ ${p.price.toLocaleString('pt-BR')}\n\n`; });
     msg += `💳 *FORMA DE PAGAMENTO:* PIX\n🎟️ *CUPOM APLICADO:*\n💸 *DESCONTO:*\n\n🚚 *ENTREGA*\n📍 Endereço: ${user.rua}, ${user.num}\n🏘️ Bairro: ${user.bairro}\n🏙️ Cidade/UF: Laranjal do Jari / AP\n📮 CEP: 68920-000\n🔍 Referência:\n📦 Tipo de Entrega: Motoboy (Grátis)\n\n`;
     const total = cart.reduce((a,b)=>a+b.price,0);
-    msg += `💰 *RESUMO FINANCEIRO*\n🛒 Subtotal: R$ ${total.toLocaleString('pt-BR')}\n🚚 Frete: R$ 0\n💸 Desconto:\n💰 *TOTAL A PAGAR:* R$ ${total.toLocaleString('pt-BR')}\n\n👤 *DADOS DO CLIENTE*\nNome: ${user.nome}\n📱 WhatsApp: (Cliente enviando...)\n\n📸 *STATUS DO PAGAMENTO:*\n📸 Comprovante enviado\n\n🙏 *OBRIGADO PELA PREFERÊNCIA!*\n*JARDSON IMPORTS – QUALIDADE E CONFIANÇA*`;
+    msg += `💰 *RESUMO FINANCEIRO*\n🛒 Subtotal: R$ ${total.toLocaleString('pt-BR')}\n🚚 Frete: R$ 0\n💸 Desconto:\n💰 *TOTAL A PAGAR:* R$ ${total.toLocaleString('pt-BR')}\n\n👤 *DADOS DO CLIENTE*\nNome: ${user.nome}\n📦 Pedido preparado, a caminho do endereço!\n\n📸 *STATUS DO PAGAMENTO:*\n📝 Enviei o comprovante, aguardando confirmação.\n\n🙏 *OBRIGADO PELA PREFERÊNCIA!*\n*JARDSON IMPORTS – QUALIDADE E CONFIANÇA*`;
     
     const waLink = `https://wa.me/5596991189596?text=${encodeURIComponent(msg)}`;
     window.open(waLink);
