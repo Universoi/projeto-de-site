@@ -53,6 +53,8 @@ h3 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; 
     <span onclick="filterCategory('motorola', this)" class="category-pill">Motorola</span>
     <span onclick="filterCategory('tvbox', this)" class="category-pill">TV & Box</span>
     <span onclick="filterCategory('games', this)" class="category-pill">Games</span>
+    <span onclick="filterCategory('perfumes', this)" class="category-pill">Perfumes</span>
+    <span onclick="filterCategory('academia', this)" class="category-pill">Academia</span>
     <span onclick="filterCategory('acessorios', this)" class="category-pill">Acessorios</span>
     <span onclick="filterCategory('outros', this)" class="category-pill">Outros</span>
 </div>
@@ -343,15 +345,25 @@ const products = [
   { id: 82, name: "Realme C63-128GB 6GB RAM Câmera 50MP Bateria 5000mAh Tela 6.74", price: 1250, promo: true, category: "realme", description: "Realme C63 com 128GB, 6GB RAM, câmera 50MP, bateria 5000mAh e tela 6.74''.", images: ["https://m.media-amazon.com/images/I/61HEZLUX1mL._AC_SX679_.jpg"] },
 
   // ACESSÓRIOS
-  { id: 91, name: "Creatine Turbo Black Skull 300g", price: 70, promo: false, category: "acessorios", description: "Creatine Turbo Black Skull 300g.", images: ["https://m.media-amazon.com/images/I/6165ojDGBPL._AC_SX679_.jpg"] },
   { id: 92, name: "Lavadora de Alta Pressão Wap Preta Ousada WL 2610 Ultra", price: 799, promo: false, category: "acessorios", description: "Lavadora de Alta Pressão Wap Preta Ousada WL 2610 Ultra.", images: ["https://m.media-amazon.com/images/I/71Yf5KxWewL._AC_SX679_.jpg"] },
 
   // TV BOX / OUTROS
   { id: 101, name: "TV Box Android 4K", price: 349, promo: true, category: "tvbox", description: "TV Box Android 4K para streaming e apps.", images: ["https://m.media-amazon.com/images/I/51tS4pNsHnL._AC_SX679_.jpg"] },
   { id: 102, name: "Smart TV Box Q5 8K", price: 499, promo: true, category: "tvbox", description: "Smart TV Box Q5 8K com performance avançada.", images: ["https://m.media-amazon.com/images/I/61y2+gWTQML._AC_SX679_.jpg"] },
 
+  // ACADÊMIA
+{ id: 91, name: "Creatine Turbo Black Skull 300g", price: 70, promo: false, category: "academia", description: "Creatine Turbo Black Skull 300g.", images: ["https://m.media-amazon.com/images/I/6165ojDGBPL._AC_SX679_.jpg"] },
+{ id: 92, name: "Whey Protein 900g Integralmedica", price: 180, promo: true, category: "academia", description: "Whey Protein sabor chocolate 900g.", images: ["https://m.media-amazon.com/images/I/71w+Qefn0kL._AC_SY679_.jpg"] },
+{ id: 93, name: "Mochila Fitness Pro 30L", price: 120, promo: false, category: "academia", description: "Mochila ideal para academia, 30 litros.", images: ["https://m.media-amazon.com/images/I/61bOe1Fq7ML._AC_SY679_.jpg"] },
+
+
+// PERFUMES
+{ id: 101, name: "Perfume Sauvage Dior 100ml", price: 450, promo: true, category: "perfumes", description: "Perfume masculino Dior Sauvage 100ml.", images: ["https://m.media-amazon.com/images/I/71x5gBdJZ-L._AC_SY679_.jpg"] },
+{ id: 102, name: "Perfume La Vie Est Belle Lancôme 75ml", price: 399, promo: false, category: "perfumes", description: "Perfume feminino La Vie Est Belle 75ml.", images: ["https://m.media-amazon.com/images/I/61o6Z0m9j-L._AC_SY679_.jpg"] },
+{ id: 103, name: "Perfume 212 VIP Carolina Herrera 100ml", price: 420, promo: true, category: "perfumes", description: "Perfume unissex 212 VIP 100ml.", images: ["https://m.media-amazon.com/images/I/71xE+r4jJ-L._AC_SY679_.jpg"] },
+
+
   // ACESSÓRIOS
-  { id: 91, name: "Creatine Turbo Black Skull 300g", price: 70, promo: false, category: "acessorios", description: "Creatine Turbo Black Skull 300g.", images: ["https://m.media-amazon.com/images/I/6165ojDGBPL._AC_SX679_.jpg"] },
   { id: 92, name: "Lavadora de Alta Pressão Wap Preta Ousada WL 2610 Ultra", price: 799, promo: false, category: "acessorios", description: "Lavadora de Alta Pressão Wap Preta Ousada WL 2610 Ultra.", images: ["https://m.media-amazon.com/images/I/71Yf5KxWewL._AC_SX679_.jpg"] },
 
   // TV BOX / OUTROS
