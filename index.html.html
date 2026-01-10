@@ -48,11 +48,13 @@ h3 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; 
     <span onclick="filterCategory('iphone', this)" class="category-pill">iPhone</span>
     <span onclick="filterCategory('samsung', this)" class="category-pill">Samsung</span>
     <span onclick="filterCategory('xiaomi', this)" class="category-pill">Xiaomi</span>
+    <span onclick="filterCategory('realme', this)" class="category-pill">Realme</span>
     <span onclick="filterCategory('tablet', this)" class="category-pill">Tablet</span>
     <span onclick="filterCategory('som', this)" class="category-pill">Som</span>
     <span onclick="filterCategory('motorola', this)" class="category-pill">Motorola</span>
     <span onclick="filterCategory('tvbox', this)" class="category-pill">TV & Box</span>
     <span onclick="filterCategory('games', this)" class="category-pill">Games</span>
+    <span onclick="filterCategory('eletrodomesticos', this)" class="category-pill">Eletrodomesticos</span>
     <span onclick="filterCategory('perfumes', this)" class="category-pill">Perfumes</span>
     <span onclick="filterCategory('academia', this)" class="category-pill">Academia</span>
     <span onclick="filterCategory('acessorios', this)" class="category-pill">Acessorios</span>
@@ -328,28 +330,29 @@ const products = [
 
   { id: 124, name: "Xiaomi Redmi Note 14 Pro Plus", price: 2799, promo: true, category: "xiaomi", description: "Smartphone Xiaomi Redmi Note 14 Pro+ Plus 5G Lavender Purple Lilás 8GB RAM 256GB ROM NFC", images: ["https://m.media-amazon.com/images/I/41wYiyy-36L._AC_.jpg", "https://m.media-amazon.com/images/I/41+GALkujhL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/41kykSb1SWL._AC_SY355_.jpg"] },
 
-  { id: 125, name: "Xiaomi Redmi 15C Midnight Black 8GB RAM 256GB", price: 1700, promo: true, category: "xiaomi", description: "Xiaomi Redmi 15C Midnight Black com 8GB RAM e 256GB.", images: ["https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSx9OVud2eWNk28GMo3zAiDINFRxsGAsazNI2vRQsnG_kejbuRWefmRO43SEQoFdHNnjyEwpAH36CQnot7GB4vVebTBWHKSf41WsNDv3wqc0-XY0XzvBU34kg"] },
+  { id: 125, name: "Xiaomi Redmi 15", price: 1700, promo: true, category: "xiaomi", description: "Xiaomi Redmi 15C Midnight Black com 8GB RAM e 256GB.", images: ["https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSx9OVud2eWNk28GMo3zAiDINFRxsGAsazNI2vRQsnG_kejbuRWefmRO43SEQoFdHNnjyEwpAH36CQnot7GB4vVebTBWHKSf41WsNDv3wqc0-XY0XzvBU34kg"] },
 
-  { id: 126, name: "Xiaomi Redmi 15C", price: 1299, promo: true, category: "xiaomi", description: "Smartphone Xiaomi Redmi 15C Midnight Black (Preto) 8GB RAM 256GB ROM", images: ["https://m.media-amazon.com/images/I/41PDgmf2u4L._AC_.jpg","https://m.media-amazon.com/images/I/41HP6T0IGaL._AC_SX355_.jpg"] },
 
   { id: 127, name: "POCO M7 Pro 5G", price: 1900, promo: true, category: "Xiaomi Smartphone POCO M7 Pro 5G 256GB | 8GB/12GB RAM | Processador Ultra Potente Dimensity 7025 | Tela AMOLED FHD+ 120Hz com Proteção Ocular | Bateria 5110mAh com 45W Turbo", images: ["https://m.media-amazon.com/images/I/71LaKVa7d2L._AC_SX522_.jpg", "https://m.media-amazon.com/images/I/71bRhBLAExL._AC_SL1500_.jpg", "https://m.media-amazon.com/images/I/61uuLlWr+aL._AC_SL1200_.jpg"] },
 
   { id: 128, name: "Xiaomi Poco X7 5G", price: 2200, promo: true, category: "xiaomi", description: "Smartphone Xiaomi Poco X7 5G NFC Silver (Prata) 12GB RAM 512GB ROM", images: ["https://m.media-amazon.com/images/I/61ct3FPtzmL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/61d54K1-BuL._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/51mkzQba9SL._AC_SX425_.jpg"] },
 
   // REALME
-  { id: 66, name: "Celular Realme C75 Dual SIM 8GB RAM 256GB", price: 1600, promo: true, category: "realme", description: "Realme C75 Dual SIM com 8GB RAM e 256GB.", images: ["https://m.media-amazon.com/images/I/51k5Y5TU0QL._AC_SX425_.jpg"] },
-  { id: 67, name: "Celular Realme C75x 128GB 6GB RAM", price: 1450, promo: true, category: "realme", description: "Realme C75x com 128GB e 6GB RAM.", images: ["https://m.media-amazon.com/images/I/61MlIxovHeL._AC_SY300_SX300_QL70_ML2_.jpg"] },
-  { id: 68, name: "Realme Note 50 128GB 4GB RAM", price: 899, promo: true, category: "realme", description: "Realme Note 50 128GB com 4GB RAM.", images: ["https://m.media-amazon.com/images/I/61sg9UK4lML._AC_SX679_.jpg"] },
-  { id: 69, name: "Realme Note 60 128GB 4GB RAM", price: 1000, promo: true, category: "realme", description: "Realme Note 60 128GB com 4GB RAM.", images: ["https://m.media-amazon.com/images/I/61gcExNZfXL._AC_SX679_.jpg"] },
-  { id: 81, name: "Realme C65 4G 256GB 8GB RAM", price: 1300, promo: true, category: "realme", description: "Realme C65 4G 256GB com 8GB RAM.", images: ["https://m.media-amazon.com/images/I/61Sunu8K4TL._AC_SX679_.jpg"] },
-  { id: 82, name: "Realme C63-128GB 6GB RAM Câmera 50MP Bateria 5000mAh Tela 6.74", price: 1250, promo: true, category: "realme", description: "Realme C63 com 128GB, 6GB RAM, câmera 50MP, bateria 5000mAh e tela 6.74''.", images: ["https://m.media-amazon.com/images/I/61HEZLUX1mL._AC_SX679_.jpg"] },
+  { id: 66, name: "Realme C75", price: 1600, promo: true, category: "realme", description: "Celular Realme C75 Dual SIM 8GB RAM 256GB Com NFC", images: ["https://m.media-amazon.com/images/I/51k5Y5TU0QL._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/51BVQWgmCNL._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/61AyTS6hFyL._AC_SX425_.jpg"] },
 
-  // ACESSÓRIOS
-  { id: 92, name: "Lavadora de Alta Pressão Wap Preta Ousada WL 2610 Ultra", price: 799, promo: false, category: "acessorios", description: "Lavadora de Alta Pressão Wap Preta Ousada WL 2610 Ultra.", images: ["https://m.media-amazon.com/images/I/71Yf5KxWewL._AC_SX679_.jpg"] },
+  { id: 67, name: "Realme C75x", price: 1450, promo: true, category: "realme", description: "Celular Realme C75x 128gb 6gb Ram Nfc", images: ["https://m.media-amazon.com/images/I/61MlIxovHeL._AC_SY300_SX300_QL70_ML2_.jpg", "https://m.media-amazon.com/images/I/619rIomvaUL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/610OaEglG9L._AC_SY355_.jpg"] },
+
+  { id: 68, name: "Realme Note 50", price: 899, promo: true, category: "realme", description: "Realme Note 50-128GB - 4GB Ram - Câmera 13MP - Bateria 5000mAh - Tela de 6,74", images: ["https://m.media-amazon.com/images/I/61sg9UK4lML._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/51OiRowJ01L._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/61gTA2daicL._AC_SX425_.jpg"] },
+
+  { id: 69, name: "Realme Note 60", price: 1000, promo: true, category: "realme", description: "Realme Note 60-128GB - 4 GB Ram - Câmera 32MP - Bateria 5000mAh", images: ["https://m.media-amazon.com/images/I/61gcExNZfXL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/517ueHZwA7L._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/41YF-XlY6lL._AC_SX425_.jpg"] },
+
+  { id: 81, name: "Realme C65", price: 1300, promo: true, category: "realme", description: "Smartphone Realme C65 4G 256GB 8GB Ram", images: ["https://m.media-amazon.com/images/I/61Sunu8K4TL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/51dNthg02+L._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/41a4eyCi7vL._AC_SX425_.jpg"] },
+
+  { id: 82, name: "Realme C63", price: 1250, promo: true, category: "realme", description: "Realme C63 com 128GB, 6GB RAM, câmera 50MP, bateria 5000mAh e tela 6.74''.", images: ["https://m.media-amazon.com/images/I/61HEZLUX1mL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/61dvaqHlHGL._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/41PCDbxdt7L._AC_SX425_.jpg"] },
+
 
   // TV BOX / OUTROS
-  { id: 101, name: "TV Box Android 4K", price: 349, promo: true, category: "tvbox", description: "TV Box Android 4K para streaming e apps.", images: ["https://m.media-amazon.com/images/I/51tS4pNsHnL._AC_SX679_.jpg"] },
-  { id: 102, name: "Smart TV Box Q5 8K", price: 499, promo: true, category: "tvbox", description: "Smart TV Box Q5 8K com performance avançada.", images: ["https://m.media-amazon.com/images/I/61y2+gWTQML._AC_SX679_.jpg"] },
+
 
   // ACADÊMIA
 { id: 91, name: "Creatine Turbo Black Skull 300g", price: 70, promo: false, category: "academia", description: "Creatine Turbo Black Skull 300g.", images: ["https://m.media-amazon.com/images/I/6165ojDGBPL._AC_SX679_.jpg"] },
@@ -364,11 +367,72 @@ const products = [
 
 
   // ACESSÓRIOS
-  { id: 92, name: "Lavadora de Alta Pressão Wap Preta Ousada WL 2610 Ultra", price: 799, promo: false, category: "acessorios", description: "Lavadora de Alta Pressão Wap Preta Ousada WL 2610 Ultra.", images: ["https://m.media-amazon.com/images/I/71Yf5KxWewL._AC_SX679_.jpg"] },
+  { id: 313, name: "Lavadora de Alta Pressão Wap Preta Ousada WL 2610 Ultra", price: 799, promo: false, category: "acessorios", description: "Lavadora de Alta Pressão Wap Preta Ousada WL 2610 Ultra.", images: ["https://m.media-amazon.com/images/I/61wnIi92TwL._AC_SY450_.jpg", "https://m.media-amazon.com/images/I/61DTlTCQVWL._AC_SY450_.jpg", "https://m.media-amazon.com/images/I/71yAVLM+LmL._AC_SY450_.jpg"] },
 
-  // TV BOX / OUTROS
-  { id: 101, name: "TV Box Android 4K", price: 349, promo: true, category: "tvbox", description: "TV Box Android 4K para streaming e apps.", images: ["https://m.media-amazon.com/images/I/51tS4pNsHnL._AC_SX679_.jpg"] },
-  { id: 102, name: "Smart TV Box Q5 8K", price: 499, promo: true, category: "tvbox", description: "Smart TV Box Q5 8K com performance avançada.", images: ["https://m.media-amazon.com/images/I/61y2+gWTQML._AC_SX679_.jpg"] }
+{ id: 312, name: "Vonder, Lavadora De Alta Pressão", price: 499, promo: true, category: "acessorios", description: "", images: ["https://m.media-amazon.com/images/I/71jnSYth5dL._AC_SY879_.jpg", "https://m.media-amazon.com/images/I/71Mqp7xgm9L._AC_SY879_.jpg", "https://m.media-amazon.com/images/I/71HSwGEXGrL._AC_SY879_.jpg"] },
+
+{ id: 311, name: "Epson EcoTank L3250", price: 499, promo: true, category: "acessorios", description: "Epson EcoTank L3250 - Multifuncional, Tanque de Tinta Colorida, Wi-Fi Direct, USB, Bivolt, Preto", images: ["https://m.media-amazon.com/images/I/818P+qYvSHS._AC_SX450_.jpg", "https://m.media-amazon.com/images/I/711H-1tni-S._AC_SY450_.jpg", "https://m.media-amazon.com/images/I/71vp5ZsJpYS._AC_SX450_.jpg"] },
+
+
+{ id: 314, name: "Impressora Multifuncional HP", price: 499, promo: true, category: "acessorios", description: "Impressora Multifuncional HP Deskjet Ink Advantage 2874 Colorida, Wi-Fi Scanner, USB. Tecnologia de impressão Jato de Tinta Térmico. Funções: Impressão, cópia, digitalização", images: ["https://m.media-amazon.com/images/I/61LTqCmZMeL._AC_SY450_.jpg", "https://m.media-amazon.com/images/I/618Drjgh1BL._AC_SX450_.jpg", "https://m.media-amazon.com/images/I/71FM3mxxLrL._AC_SX450_.jpg"] },
+
+
+
+  // TV BOX
+  { id: 161, name: "Smart TV Aiwa 32", price: 1400, promo: true, category: "tvbox", description: "Smart TV Aiwa 32 Android HD Borda Ultrafina HDR10 Dolby Áudio", images: ["https://m.media-amazon.com/images/I/71dubOlKt2L._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/71D7+feH5fL._AC_SY355_.jpg","https://m.media-amazon.com/images/I/61vjASiO-JL._AC_SY355_.jpg"] },
+
+  { id: 181, name: "Smart TV Aiwa 43", price: 1900, promo: true, category: "tvbox", description: "Smart TV Aiwa 43, Android, Full HD, Borda Ultrafina, HDR10, Dolby Áudio - AWS-TV-43-BL-02-A", images: ["https://m.media-amazon.com/images/I/61R0cdZif8L._AC_SL1000_.jpg","https://m.media-amazon.com/images/I/51akV1VNxrL._AC_SL1500_.jpg","https://m.media-amazon.com/images/I/71wFhQZU3iL._AC_SL1500_.jpg"] },
+
+ { id: 156, name: "Smart TV Aiwa 50", price: 2400, promo: true, category: "tvbox", description: "Smart TV Aiwa 50, Android, 4K, Borda Ultrafina, HDR10, Dolby Áudio ", images: ["https://m.media-amazon.com/images/I/71WIlpBAYeL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/71dtW5XKLmL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/61vjASiO-JL._AC_SY355_.jpg"] },
+
+ { id: 109, name: "Smart TV AIWA 65", price: 3800, promo: true, category: "tvbox", description: "Smart TV AIWA 65 GOOGLE TV 4K Comando de voz Dolby Vision&Atmos AWS", images: ["https://m.media-amazon.com/images/I/615B96JKyhL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/71-dZHIsRSL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/61iqehcJrgL._AC_SY355_.jpg"] },
+
+ { id: 156, name: "Aparelho Unitv V10", price: 800, promo: true, category: "tvbox", description: "Aparelho Unitv V10 Full HD 4k Full HD 5g - 8gb Unit - v10 Original", images: ["https://m.media-amazon.com/images/I/41NebikRrpL._AC_.jpg", "https://m.media-amazon.com/images/I/41onDUeXNnL._AC_.jpg"] },
+
+
+ { id: 159, name: "Smart TV TCL 43", price: 2000, promo: true, category: "tvbox", description: "Smart TV TCL 43 Polegadas Full HD QLED S5K WiFi Bluetooth Google TV 2 HDMI HDR10 Dolby Audio", images: ["https://m.media-amazon.com/images/I/61vvuSqE3HL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/41h6Fk3b+xL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/51WyoSLsuaL._AC_SY355_.jpg"] },
+
+
+ { id: 161, name: "Smart TV TCL 50", price: 2500, promo: true, category: "tvbox", description: "Smart TV TCL 50 Polegadas QLED 4K P7K WiFi Bluetooth Google TV HDR10+ Dolby Atmos Dolby Vision 50P7K", images: ["https://m.media-amazon.com/images/I/816KGIj16bL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/81HEKPlXHuL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/71xSnrEVlwL._AC_SY355_.jpg"] },
+
+{ id: 163, name: "Smart TV TCL 55", price: 2900, promo: true, category: "tvbox", description: "Smart TV TCL 55 Polegadas QLED 4K P7K WiFi Bluetooth Google TV HDR10+ Dolby Atmos Dolby Vision 55P7K", images: ["https://m.media-amazon.com/images/I/81TW4lbHMDL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/81MnBkIph2L._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/71USPqm+WtL._AC_SY355_.jpg"] },
+
+{ id: 164, name: "Smart TV TCL 65", price: 3900, promo: true, category: "tvbox", description: "Smart TV TCL 65 Polegadas QLED 4K P7K WiFi Bluetooth Google TV HDR10+ Dolby Atmos Dolby Vision 65P7K", images: ["https://m.media-amazon.com/images/I/818m5AqXyhL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/81yjFpPolRL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/71OLAvHqfCL._AC_SY355_.jpg"] },
+
+{ id: 165, name: "Fire TV Stick HD Alexa", price: 450, promo: true, category: "tvbox", description: "Fire TV Stick HD (Geração mais recente) | Com controle remoto por voz com Alexa (inclui comandos de TV), controles de casa inteligente e streaming em HD", images: ["https://m.media-amazon.com/images/I/61Lg5RZZFQL._AC_SY450_.jpg", "https://m.media-amazon.com/images/I/81VV90EOvNL._AC_SY450_.jpg", "https://m.media-amazon.com/images/I/81-+P0k3eLL._AC_SY450_.jpg"] },
+
+
+{ id: 166, name: "Hisense Smart TV UHD 4K QLED 65", price: 3900, promo: true, category: "tvbox", description: "Hisense Smart TV UHD 4K QLED 65 Polegadas 65Q6QV com HDR10+, Dolby Atmos, Sports Mode, Game Mode Plus e Compatível com Alexa", images: ["https://m.media-amazon.com/images/I/819E39v76vL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/8183XTK+IdL._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/81qvYtlO-UL._AC_SY355_.jpg"] },
+
+
+{ id: 109, name: "Hisense Smart TV 4K 75", price: 4999, promo: true, category: "tvbox", description: "Hisense Smart TV 4K 75 Polegadas 75A6NV com Dolby Vision, HDR10, HLG, DTS Virtual X, Compatibilidade Alexa e Google Home", images: ["https://m.media-amazon.com/images/I/81SM5zKmX1L._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/81SM5zKmX1L._AC_SY355_.jpg", "https://m.media-amazon.com/images/I/71oIPF90hOL._AC_SY355_.jpg"] },
+
+{ id: 167, name: "TV Box MXQ-PRO 4K", price: 150, promo: true, category: "tvbox", description: "Smart TV Box MXQ-PRO 4K HD Android 10.0 TV BOX 2.4/5G Dual-WIFI", images: ["https://i.ebayimg.com/images/g/K2YAAOSwCbtmf7WC/s-l1600.webp", "https://i.ebayimg.com/images/g/RDQAAOSwA1Vmf7WC/s-l1600.webp"] },
+
+// GAMES
+
+{ id: 101, name: "PlayStation®5 Slim Digital", price: 3600, promo: true, category: "games", description: "PlayStation®5 Slim Digital 825GB – Pacote ASTRO BOT e Gran Turismo 7", images: ["https://m.media-amazon.com/images/I/71WCygaQDAL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/61QtvOK1hDL._AC_SX466_.jpg", "https://m.media-amazon.com/images/I/71iFkDuDGgL._AC_SX466_.jpg"] },
+
+{ id: 107, name: "Nintendo Switch 2 ", price: 4800, promo: true, category: "games", description: "Bundle Nintendo Switch 2 + Jogo Digital Mario Kart World – Modelo Nacional de Tomada", images: ["https://m.media-amazon.com/images/I/61XUxyAtX3L._AC_SX522_.jpg", "https://m.media-amazon.com/images/I/51T72WaAlDL._AC_SX522_.jpg", "https://m.media-amazon.com/images/I/41r3JyXynGL._AC_SX522_.jpg"] },
+
+{ id: 104, name: "Nintendo Switch", price: 2099, promo: true, category: "games", description: "Bundle Nintendo Switch + Super Mario Bros. Wonder + 3 Meses de Assinatura Nintendo Switch Online", images: ["https://m.media-amazon.com/images/I/61zaf8R7S7L._AC_SX522_.jpg", "https://m.media-amazon.com/images/I/51paDG1nnyL._AC_SX522_.jpg", "https://m.media-amazon.com/images/I/61WLY9kgbNL._AC_SX522_.jpg"] },
+
+{ id: 105, name: "R36S Retro Handheld", price: 390, promo: true, category: "games", description: "VGBUS R36S Handheld Game Console,3.5-Inch IPS Screen Retro Gaming Console,3500mAh,Built in 20000+ Games. (Black-128G(20000+ Games))", images: ["https://m.media-amazon.com/images/I/61BVPROt32L._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/71RKXrgg+WL._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/71BM8Y1Ex5L._AC_SX425_.jpg"] },
+
+{ id: 109, name: "Console Mini Game NES", price: 120, promo: true, category: "games", description: "Console Mini Game NES Aniversary Edition Retro 500 Jogos Classicos", images: ["https://images.tcdn.com.br/img/img_prod/1042771/console_mini_game_nes_aniversary_edition_retro_500_3_20260107110033_ba54e78fb357.jpg", "https://images.tcdn.com.br/img/img_prod/1042771/console_mini_game_nes_aniversary_edition_retro_500_4_20260107110033_f7b2dea114d7.jpg", "https://images.tcdn.com.br/img/img_prod/1042771/console_mini_game_nes_aniversary_edition_retro_500_5_20260107110033_99556dc61b48.jpg"] },
+
+
+
+// PERFUMES
+
+
+
+
+//ACADEMIA 
+
+
+//ELETRODOMESTICOS
+
 
 
   // restante dos produtos segue igual (corrigidos os "url2" etc)
