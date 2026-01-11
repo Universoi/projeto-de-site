@@ -62,6 +62,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8f9fa; color:
     <span onclick="filterCategory('games', this)" class="category-pill">Games</span>
     <span onclick="filterCategory('perfumes', this)" class="category-pill">Perfumes</span>
     <span onclick="filterCategory('academia', this)" class="category-pill">Academia</span>
+    <span onclick="filterCategory('eletrodomesticos', this)" class="category-pill">Eletrodomesticos</span>
     <span onclick="filterCategory('acessorios', this)" class="category-pill">Acessorios</span>
 </div>
 
@@ -368,16 +369,24 @@ const products = [
 { id: 115, name: "TV Box MXQ-PRO 4K", price: 150, promo: true, category: "tvbox", description: "Smart TV Box MXQ-PRO 4K HD Android 10.0 TV BOX 2.4/5G Dual-WIFI", images: ["https://i.ebayimg.com/images/g/K2YAAOSwCbtmf7WC/s-l1600.webp", "https://i.ebayimg.com/images/g/RDQAAOSwA1Vmf7WC/s-l1600.webp"] },
 
 // GAMES
-
 { id: 116, name: "PlayStation®5 Slim Digital", price: 3600, promo: true, category: "games", description: "PlayStation®5 Slim Digital 825GB – Pacote ASTRO BOT e Gran Turismo 7", images: ["https://m.media-amazon.com/images/I/71WCygaQDAL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/61QtvOK1hDL._AC_SX466_.jpg", "https://m.media-amazon.com/images/I/71iFkDuDGgL._AC_SX466_.jpg"] },
 
 { id: 117, name: "Nintendo Switch 2 ", price: 4800, promo: true, category: "games", description: "Bundle Nintendo Switch 2 + Jogo Digital Mario Kart World – Modelo Nacional de Tomada", images: ["https://m.media-amazon.com/images/I/61XUxyAtX3L._AC_SX522_.jpg", "https://m.media-amazon.com/images/I/51T72WaAlDL._AC_SX522_.jpg", "https://m.media-amazon.com/images/I/41r3JyXynGL._AC_SX522_.jpg"] },
 
-{ id: 118, name: "Nintendo Switch", price: 2099, promo: true, category: "games", description: "Bundle Nintendo Switch + Super Mario Bros. Wonder + 3 Meses de Assinatura Nintendo Switch Online", images: ["https://m.media-amazon.com/images/I/61zaf8R7S7L._AC_SX522_.jpg", "https://m.media-amazon.com/images/I/51paDG1nnyL._AC_SX522_.jpg", "https://m.media-amazon.com/images/I/61WLY9kgbNL._AC_SX522_.jpg"] },
+{ id: 149, name: "Nintendo Switch", price: 2099, promo: true, category: "games", description: "Bundle Nintendo Switch + Super Mario Bros. Wonder + 3 Meses de Assinatura Nintendo Switch Online", images: ["https://m.media-amazon.com/images/I/61zaf8R7S7L._AC_SX522_.jpg", "https://m.media-amazon.com/images/I/51paDG1nnyL._AC_SX522_.jpg", "https://m.media-amazon.com/images/I/61WLY9kgbNL._AC_SX522_.jpg"] },
 
-{ id: 118, name: "R36S Retro Handheld", price: 390, promo: true, category: "games", description: "VGBUS R36S Handheld Game Console,3.5-Inch IPS Screen Retro Gaming Console,3500mAh,Built in 20000+ Games. (Black-128G(20000+ Games))", images: ["https://m.media-amazon.com/images/I/61BVPROt32L._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/71RKXrgg+WL._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/71BM8Y1Ex5L._AC_SX425_.jpg"] },
+{ id: 148, name: "R36S Retro Handheld", price: 390, promo: true, category: "games", description: "VGBUS R36S Handheld Game Console,3.5-Inch IPS Screen Retro Gaming Console,3500mAh,Built in 20000+ Games. (Black-128G(20000+ Games))", images: ["https://m.media-amazon.com/images/I/61BVPROt32L._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/71RKXrgg+WL._AC_SX425_.jpg", "https://m.media-amazon.com/images/I/71BM8Y1Ex5L._AC_SX425_.jpg"] },
 
-{ id: 119, name: "Console Mini Game NES", price: 120, promo: true, category: "games", description: "Console Mini Game NES Aniversary Edition Retro 500 Jogos Classicos", images: ["https://images.tcdn.com.br/img/img_prod/1042771/console_mini_game_nes_aniversary_edition_retro_500_3_20260107110033_ba54e78fb357.jpg", "https://images.tcdn.com.br/img/img_prod/1042771/console_mini_game_nes_aniversary_edition_retro_500_4_20260107110033_f7b2dea114d7.jpg", "https://images.tcdn.com.br/img/img_prod/1042771/console_mini_game_nes_aniversary_edition_retro_500_5_20260107110033_99556dc61b48.jpg"] },
+{ id: 149, name: "Console Mini Game NES", price: 120, promo: true, category: "games", description: "Console Mini Game NES Aniversary Edition Retro 500 Jogos Classicos", images: ["https://images.tcdn.com.br/img/img_prod/1042771/console_mini_game_nes_aniversary_edition_retro_500_3_20260107110033_ba54e78fb357.jpg", "https://images.tcdn.com.br/img/img_prod/1042771/console_mini_game_nes_aniversary_edition_retro_500_4_20260107110033_f7b2dea114d7.jpg", "https://images.tcdn.com.br/img/img_prod/1042771/console_mini_game_nes_aniversary_edition_retro_500_5_20260107110033_99556dc61b48.jpg"] },
+
+{ id: 191, name: "Controlador De Jogo Sem Fio X3 Para Android Bluetooth Galaxy", price: 200, promo: true, category: "games", description: "Compatibilidade universal: projetado para uma experiência de jogo perfeita, o controlador sem fio for X3 é compatível com uma ampla variedade de dispositivos Android, garantindo que você use seu smartphone ou tablet sem problemas.", images: ["https://http2.mlstatic.com/D_Q_NP_632616-CBT97376111564_112025-F.webp", "https://http2.mlstatic.com/D_NQ_NP_2X_788444-CBT97838108005_112025-F.webp", "https://http2.mlstatic.com/D_NQ_NP_2X_916184-CBT97838108007_112025-F.webp"] },
+
+
+{ id: 192, name: "Mouse sem fio 2.4G, silencioso", price: 170, promo: true, category: "games", description: "Resposta rápida: Suporta ajuste de DPI em 5 níveis, o mouse sem fio 2.4G sensível também possui uma velocidade de retorno de 125Hz, uma velocidade de movimento de 30 IPS,", images: ["https://m.media-amazon.com/images/I/61Wa0ED9dPL._AC_SY450_.jpg", "https://m.media-amazon.com/images/I/61AX0ZXuHtL._AC_SY450_.jpg", "https://m.media-amazon.com/images/I/61tAL86meFL._AC_SL1500_.jpg"] },
+
+{ id: 190, name: "Controle Gamepad Sem Fio", price: 499, promo: true, category: "games", description: "Controle Gamepad Sem Fio PC/PS4/Celular Inova CON-12867", images: ["https://www.sosdolojista.com.br/image/cache/data/eftr/Img_ftr_rp_4055201-1160x1164.JPG","https://www.sosdolojista.com.br/image/cache/data/eftr/Img_ftr_rp_4055101-1160x1164.JPG"] },
+
+
 
 
 // PERFUMES
@@ -385,10 +394,21 @@ const products = [
 
 
 
-
-
-
 //ELETRODOMESTICOS
+{ id: 140, name: "Micro-ondas midea 20L Prata Porta Espelhada", price: 699, promo: true, category: "eletrodomesticos", description: "O Micro-ondas 20L MasterCook Midea chegou para transformar sua experiência na cozinha! Descubra a praticidade e inovação da linha MasterCook Midea e leve mais tecnologia para o seu dia a dia!", images: ["https://m.media-amazon.com/images/I/61FevnWBKmL._AC_SX679_.jpg", "https://m.media-amazon.com/images/I/81ktScDiYQL._AC_SX569_.jpg", "https://m.media-amazon.com/images/I/81lRrftNP1L._AC_SX569_.jpg"] },
+
+{ id: 141, name: "Airfryer mondial Forno Oven 12L, Preto/Inox", price: 999, promo: true, category: "eletrodomesticos", description: "Tela sensível ao toque com 7 predefinições: Toque em um botão e cozinhe. Os programas predefinidos incluem petiscos congelados, batatas fritas frescas, carne, peixe, coxas de frango, bolo e até mesmo vegetais grelhados.", images: ["https://m.media-amazon.com/images/I/51USP1yVx+L._AC_SX466_.jpg", "https://m.media-amazon.com/images/I/51NVg1UEsBL._AC_SX466_.jpg", "https://m.media-amazon.com/images/I/51FVU8o+SZL._AC_SX466_.jpg"] },
+
+
+{ id: 142, name: "MONDIAL Fritadeira Elétrica Sem Óleo", price: 499, promo: true, category: "eletrodomesticos", description: "GRANDE CAPACIDADE DE 4L: ASSA, COZINHA, GRATINA E FRITA: São 5,5L de capacidade para você preparar uma grande variedade de alimentos para toda a família! Simplifique a sua vida na cozinha!", images: ["https://m.media-amazon.com/images/I/61yODTSZU4L._AC_SX466_.jpg", "https://m.media-amazon.com/images/I/61yE0aoOPyL._AC_SX466_.jpg", "https://m.media-amazon.com/images/I/61Mae92ExgL._AC_SX466_.jpg"] },
+
+
+{ id: 143, name: "Micro-ondas philco 25La", price: 899, promo: true, category: "eletrodomesticos", description: "Micro-Ondas Philco  25L 1100W  Múltiplas Funções  Tira Odor  Pintura Limpa Fácil  Função descongelar - Função travar - Função display - Função Display/Sound - Menu FIT", images: ["https://m.media-amazon.com/images/I/617WMTv2+wL._AC_SX569_.jpg", "https://m.media-amazon.com/images/I/71Ak41iIagL._AC_SX569_.jpg", "https://m.media-amazon.com/images/I/71C4eMTxxcL._AC_SX569_.jpg"] },
+
+
+{ id: 144, name: "Panela de Pressão Elétrica", price: 599, promo: true, category: "eletrodomesticos", description: "6L de capacidade com 8 funções pré-programadas] A Panela de Pressão Digital Midea conta com 8 funções pré-programadas oferecendo diversas possibilidades para o seu dia a dia : Assar, Fritar, Refogar, Cozimento lento, Minha Receita, Meu Sabor, Timer, Manter Aquecido", images: ["https://m.media-amazon.com/images/I/614G6tkffwL._AC_SX466_.jpg", "https://m.media-amazon.com/images/I/61H9MuNFcsS._AC_SX466_.jpg", "https://m.media-amazon.com/images/I/612FXGC-rhL._AC_SX466_.jpg"] },
+
+{ id: 145, name: "Fritadeira Elétrica Airfryer Britânia", price: 499, promo: true, category: "eletrodomesticos", description: "Air Fryer Britânia BFR25P tem design moderno e é ideal para deixar sua cozinha mais elegante. Possibilita fritar com muito pouco ou sem nenhum óleo, proporcionando refeições mais saudáveis com facilidade", images: ["https://http2.mlstatic.com/D_Q_NP_823942-MLA84552512158_052025-F.webp", "https://http2.mlstatic.com/D_NQ_NP_2X_624557-MLA84552484620_052025-F.webp", "https://http2.mlstatic.com/D_NQ_NP_2X_950887-MLA84552594734_052025-F.webp"] },
 
 
 
