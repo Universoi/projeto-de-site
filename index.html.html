@@ -20,7 +20,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8f9fa; color:
 .discount-tag { position: absolute; top: 8px; left: 8px; background: #ff4d4d; color: white; padding: 3px 7px; border-radius: 6px; font-size: 9px; font-weight: 800; z-index: 10; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
-/* AliExpress Style Toast */
 #toast { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); color: white; padding: 12px 24px; border-radius: 50px; display: flex; align-items: center; gap: 10px; z-index: 1000; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 #toast.show { top: 20px; }
 
@@ -51,7 +50,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8f9fa; color:
 </header>
 
 <div class="flex overflow-x-auto gap-2 max-w-5xl mx-auto pb-4 category-scroll px-4 mt-4 no-scrollbar">
-       <span onclick="filterCategory('all', this)" class="category-pill active">Todos</span>
+    <span onclick="filterCategory('all', this)" class="category-pill active">Todos</span>
     <span onclick="filterCategory('iphone', this)" class="category-pill">iPhone</span>
     <span onclick="filterCategory('samsung', this)" class="category-pill">Samsung</span>
     <span onclick="filterCategory('xiaomi', this)" class="category-pill">Xiaomi</span>
@@ -76,28 +75,55 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8f9fa; color:
 </div>
 
 <div id="profile-modal" class="side-modal">
-  <div class="p-6 flex flex-col h-full relative">
-    <button onclick="closeAllModals()" class="mb-6 self-end text-gray-500 hover:text-gray-800 transition">
-      <i class="fa-solid fa-xmark text-2xl"></i>
-    </button>
+  <div class="p-6 flex flex-col h-full relative bg-white">
+    <div class="flex justify-between items-center mb-8">
+        <h2 class="font-black text-2xl text-gray-800 tracking-tighter">MEU <span class="text-[#ee4d2d]">PERFIL</span></h2>
+        <button onclick="closeAllModals()" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-200 transition">
+            <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+    </div>
 
     <div class="flex-1 overflow-auto pb-40">
-      <div id="user-logged" class="hidden text-center mb-6">
+      <div id="user-logged" class="hidden text-center p-6 rounded-[32px] bg-gradient-to-b from-gray-50 to-white border border-gray-100 mb-6">
         <div class="relative w-24 h-24 mx-auto mb-4">
-          <img id="profile-pic" src="https://previews.123rf.com/images/zrzahid/zrzahid2504/zrzahid250423478/244501732-flat-style-user-profile-icon-vector-illustration-for-user-interface-documents-websites-and-mobile.avif" class="w-24 h-24 rounded-full object-cover border-4 border-[#ee4d2d] shadow-lg">
+          <div class="absolute inset-0 bg-[#ee4d2d] rounded-full animate-pulse opacity-20"></div>
+          <img id="profile-pic" src="https://ui-avatars.com/api/?background=ee4d2d&color=fff&name=User" class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-xl relative z-10">
         </div>
-        <h3 id="user-name-display" class="font-bold text-lg text-gray-800">Usuário</h3>
-        <p id="user-addr-display" class="text-sm text-gray-500">Endereço</p>
-        <button onclick="logout()" class="w-full mt-6 py-3 bg-red-500 text-white rounded-xl font-bold text-sm uppercase shadow">Sair / Editar</button>
+        <h3 id="user-name-display" class="font-extrabold text-xl text-gray-800"></h3>
+        <p id="user-addr-display" class="text-sm text-gray-500 mb-6 font-medium"></p>
+        <button onclick="logout()" class="w-full py-4 border-2 border-gray-100 text-gray-400 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-red-50 hover:text-red-500 hover:border-red-100 transition-all">
+            Sair e Editar Dados
+        </button>
       </div>
 
-      <form id="user-form" class="space-y-4">
-        <h2 class="font-black text-xl text-gray-800">Seu Cadastro</h2>
-        <input type="text" id="reg-nome" placeholder="Nome Completo" required class="w-full p-4 bg-gray-50 rounded-xl text-sm outline-none shadow-inner">
-        <input type="text" id="reg-rua" placeholder="Rua / Avenida" required class="w-full p-4 bg-gray-50 rounded-xl text-sm outline-none shadow-inner">
-        <input type="text" id="reg-num" placeholder="Número" required class="w-full p-4 bg-gray-50 rounded-xl text-sm outline-none shadow-inner">
-        <input type="text" id="reg-bairro" placeholder="Bairro" required class="w-full p-4 bg-gray-50 rounded-xl text-sm outline-none shadow-inner">
-        <button type="submit" class="w-full py-4 bg-gradient-to-r from-[#ee4d2d] to-[#ffb347] text-white rounded-xl font-bold shadow-lg">SALVAR DADOS</button>
+      <form id="user-form" class="space-y-5">
+        <div class="bg-orange-50 p-4 rounded-2xl mb-4 border border-orange-100">
+            <p class="text-orange-700 text-xs font-bold flex items-center gap-2 uppercase tracking-tighter">
+                <i class="fa-solid fa-truck-fast"></i> Entrega Rápida em Laranjal do Jari
+            </p>
+        </div>
+
+        <div class="group">
+            <label class="text-[10px] font-black text-gray-400 uppercase ml-2 mb-1 block tracking-widest">Nome Completo</label>
+            <input type="text" id="reg-nome" placeholder="Ex: João Silva" required class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-[#ee4d2d] focus:bg-white rounded-2xl text-sm outline-none transition-all shadow-sm">
+        </div>
+
+        <div class="group">
+            <label class="text-[10px] font-black text-gray-400 uppercase ml-2 mb-1 block tracking-widest">Endereço de Entrega</label>
+            <div class="grid grid-cols-3 gap-2">
+                <input type="text" id="reg-rua" placeholder="Rua / Avenida" required class="col-span-2 p-4 bg-gray-50 border-2 border-transparent focus:border-[#ee4d2d] focus:bg-white rounded-2xl text-sm outline-none transition-all shadow-sm">
+                <input type="text" id="reg-num" placeholder="Nº" required class="p-4 bg-gray-50 border-2 border-transparent focus:border-[#ee4d2d] focus:bg-white rounded-2xl text-sm outline-none transition-all shadow-sm">
+            </div>
+        </div>
+
+        <div class="group">
+            <label class="text-[10px] font-black text-gray-400 uppercase ml-2 mb-1 block tracking-widest">Bairro</label>
+            <input type="text" id="reg-bairro" placeholder="Ex: Agreste" required class="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-[#ee4d2d] focus:bg-white rounded-2xl text-sm outline-none transition-all shadow-sm">
+        </div>
+
+        <button type="submit" class="w-full py-5 bg-gradient-to-r from-[#ee4d2d] to-[#ff6b3d] text-white rounded-[20px] font-black text-sm uppercase tracking-widest shadow-[0_10px_20px_rgba(238,77,45,0.3)] active:scale-[0.98] transition-all">
+            Salvar e Continuar Compra
+        </button>
       </form>
     </div>
 
@@ -188,7 +214,7 @@ let user = JSON.parse(localStorage.getItem('jardson_db')) || null;
 const whatsappLoja = "5596984033104";
 
 const products = [
- // IPHONES
+// IPHONES
   { id: 1, name: "Apple iPhone 17 Pro Max", price: 10099, promo: true, category: "iphone", description: "iPhone top de linha, 256GB, cor Laranja cósmico.", images: ["https://m.media-amazon.com/images/I/51nj2ICJyeL._AC_SX342_.jpg","https://m.media-amazon.com/images/I/517XGmJyA0L._AC_SX522_.jpg","https://m.media-amazon.com/images/I/41aZFOedFkL._AC_SX522_.jpg"] },
 
   { id: 51, name: "Apple iPhone 17 Pro", price: 8800, promo: true, category: "iphone", description: "iPhone 17 Pro, 256GB, Azul intenso.", images: ["https://m.media-amazon.com/images/I/41uMcSPiYAL._AC_SX342_.jpg",,"https://m.media-amazon.com/images/I/51nhjDNhsIL._AC_SX342_.jpg","https://m.media-amazon.com/images/I/41k0Gekg9gL._AC_SX342_.jpg"] },
@@ -360,8 +386,24 @@ const products = [
 
 
   // restante dos produtos segue igual (corrigidos os "url2" etc)
-
 ];
+
+// FUNÇÃO DE CÓPIA ADICIONADA AQUI
+function copyPixCode() {
+    const pixInput = document.getElementById("pix-code");
+    const successMsg = document.getElementById("copy-success");
+
+    navigator.clipboard.writeText(pixInput.value).then(() => {
+        successMsg.classList.remove("hidden");
+        setTimeout(() => successMsg.classList.add("hidden"), 2000);
+    }).catch(() => {
+        // Fallback para dispositivos antigos
+        pixInput.select();
+        document.execCommand("copy");
+        successMsg.classList.remove("hidden");
+        setTimeout(() => successMsg.classList.add("hidden"), 2000);
+    });
+}
 
 function showToast() {
     const toast = document.getElementById('toast');
@@ -409,18 +451,15 @@ function openProductDetail(id) {
             <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl text-[13px] text-gray-500 mb-8 leading-relaxed">
                 ${p.description}
             </div>
-            
             <div class="flex gap-3">
                 <button onclick="askDoubt('${p.name}')" class="flex-none w-14 h-14 border border-green-500 text-green-500 rounded-2xl flex items-center justify-center active:scale-90 transition-all">
                     <i class="fa-brands fa-whatsapp text-2xl"></i>
                 </button>
-                
                 <button onclick="addToCart(${p.id})" class="flex-1 bg-black text-white rounded-2xl font-bold text-xs uppercase tracking-widest shadow-lg active:scale-95 transition-all">
                     Adicionar à Sacola
                 </button>
             </div>
         </div>
-    
     `;
     openModal('product-modal');
 }
@@ -437,6 +476,11 @@ function updateMainImg(el, src) {
 }
 
 function addToCart(id) {
+    if (!user) {
+        openModal('profile-modal');
+        alert("Por favor, preencha seus dados de entrega para adicionar produtos à sacola.");
+        return;
+    }
     const p = products.find(i => i.id === id);
     cart.push(p);
     updateCartUI();
