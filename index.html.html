@@ -145,7 +145,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8f9fa; color:
         <div class="mb-6">
             <p class="text-sm font-bold text-gray-600 mb-2 text-left px-2">Pix Copia e Cola:</p>
             <div class="flex gap-2">
-                <input type="text" id="pix-code" readonly value="jardsonimportsrico@gmail.com" 
+                <input type="text" id="pix-code" readonly value="00020126500014BR.GOV.BCB.PIX0128jardsonimportsrico@gmail.com5204000053039865802BR5925JARDSON DOS SANTOS PEREIR6009SAO PAULO62140510sTh0SROYwZ6304DF37" 
                 class="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-xs font-mono text-gray-500 w-full overflow-hidden whitespace-nowrap outline-none">
                 
                 <button onclick="copyPixCode()" class="bg-gray-800 text-white px-4 rounded-xl hover:bg-black transition-colors" title="Copiar código">
@@ -476,19 +476,55 @@ function showPix() {
 
 function closePayment() { document.getElementById('payment-overlay').classList.add('hidden'); }
 
-function sendWhatsApp(){
+function sendOrderToWhatsApp(){
     if(!user) return;
+
     const today = new Date();
     const dataPedido = today.toLocaleDateString('pt-BR');
     const horaPedido = today.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
-    let msg = `🚀 *NOVO PEDIDO - JARDSON IMPORTS*\n\n📅 *DATA DO PEDIDO:* ${dataPedido}\n⏰ *HORÁRIO:* ${horaPedido}\n🆔 *Nº DO PEDIDO:* #${Math.floor(Math.random()*9000+1000)}\n\n📦 *ITENS DO PEDIDO:*\n`;
-    cart.forEach(p=>{ msg += `• Produto: ${p.name}\n  └ Quantidade: 1\n  └ Valor Unitário: R$ ${p.price.toLocaleString('pt-BR')}\n\n`; });
-    msg += `💳 *FORMA DE PAGAMENTO:* PIX\n🎟️ *CUPOM APLICADO:*\n💸 *DESCONTO:*\n\n🚚 *ENTREGA*\n📍 Endereço: ${user.rua}, ${user.num}\n🏘️ Bairro: ${user.bairro}\n🏙️ Cidade/UF: Laranjal do Jari / AP\n📮 CEP: 68920-000\n🔍 Referência:\n📦 Tipo de Entrega: Motoboy (Grátis)\n\n`;
+    const numeroPedido = Math.floor(Math.random()*9000+1000);
+
+    let msg = `🚀 *NOVO PEDIDO - JARDSON IMPORTS*\n\n`;
+    msg += `📅 *DATA DO PEDIDO:* ${dataPedido}\n`;
+    msg += `⏰ *HORÁRIO:* ${horaPedido}\n`;
+    msg += `🆔 *Nº DO PEDIDO:* #${numeroPedido}\n\n`;
+    msg += `📦 *ITENS DO PEDIDO:*\n`;
+
+    cart.forEach(p => {
+        msg += `• Produto: ${p.name}\n`;
+        msg += `  └ Quantidade: 1\n`;
+        msg += `  └ Valor Unitário: R$ ${p.price.toLocaleString('pt-BR')}\n\n`;
+    });
+
     const total = cart.reduce((a,b)=>a+b.price,0);
-    msg += `💰 *RESUMO FINANCEIRO*\n🛒 Subtotal: R$ ${total.toLocaleString('pt-BR')}\n🚚 Frete: R$ 0\n💸 Desconto:\n💰 *TOTAL A PAGAR:* R$ ${total.toLocaleString('pt-BR')}\n\n👤 *DADOS DO CLIENTE*\nNome: ${user.nome}\n📦 Pedido preparado, a caminho do endereço!\n\n📸 *STATUS DO PAGAMENTO:*\n📝 Enviei o comprovante, aguardando confirmação.\n\n🙏 *OBRIGADO PELA PREFERÊNCIA!*\n*JARDSON IMPORTS – QUALIDADE E CONFIANÇA*`;
-    
-    const waLink = `https://wa.me/5596991189596?text=${encodeURIComponent(msg)}`;
-    window.open(waLink);
+
+    msg += `💳 *FORMA DE PAGAMENTO:* PIX\n`;
+    msg += `🎟️ *CUPOM APLICADO:*\n`;
+    msg += `💸 *DESCONTO:*\n\n`;
+
+    msg += `🚚 *ENTREGA*\n`;
+    msg += `📍 Endereço: ${user.rua}, ${user.num}\n`;
+    msg += `🏘️ Bairro: ${user.bairro}\n`;
+    msg += `🏙️ Cidade/UF: Laranjal do Jari / AP\n`;
+    msg += `📮 CEP: 68920-000\n`;
+    msg += `🔍 Referência:\n`;
+    msg += `📦 Tipo de Entrega: Motoboy (Grátis)\n\n`;
+
+    msg += `💰 *RESUMO FINANCEIRO*\n`;
+    msg += `🛒 Subtotal: R$ ${total.toLocaleString('pt-BR')}\n`;
+    msg += `🚚 Frete: R$ 0\n`;
+    msg += `💸 Desconto:\n`;
+    msg += `💰 *TOTAL A PAGAR:* R$ ${total.toLocaleString('pt-BR')}\n\n`;
+
+    msg += `👤 *DADOS DO CLIENTE*\n`;
+    msg += `Nome: ${user.nome}\n\n`;
+    msg += `📸 *STATUS DO PAGAMENTO:*\n`;
+    msg += `📝 Enviei o comprovante, aguardando confirmação.\n\n`;
+    msg += `🙏 *OBRIGADO PELA PREFERÊNCIA!*\n`;
+    msg += `*JARDSON IMPORTS – QUALIDADE E CONFIANÇA*`;
+
+    const waLink = `https://wa.me/${whatsappLoja}?text=${encodeURIComponent(msg)}`;
+    window.open(waLink, "_blank");
 }
 
 document.getElementById('user-form').onsubmit = function(e) {
