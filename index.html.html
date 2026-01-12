@@ -13,18 +13,18 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8f9fa; color:
 .product-card { background: white; border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); transition: 0.3s; cursor: pointer; position: relative; height: 100%; display: flex; flex-direction: column; }
 .product-card:active { transform: scale(0.96); }
 .category-pill { white-space: nowrap; padding: 8px 16px; border-radius: 20px; background: white; font-size: 12px; font-weight: 700; border: 1px solid #eee; transition: 0.3s; flex-shrink: 0; cursor: pointer; }
-.category-pill.active { background: #ee4d2d; color: white; border-color: #ee4d2d; }
+.category-pill.active { background: rgb(248, 101, 16); color: white; border-color: #ee5c07; }
 .side-modal { position: fixed; top: 0; right: -100%; width: 100%; height: 100%; background: white; z-index: 200; transition: 0.4s; overflow-y: auto; }
 .side-modal.active { right: 0; }
 @media (min-width: 768px) { .side-modal { width: 420px; box-shadow: -10px 0 30px rgba(0,0,0,0.1); } }
-.discount-tag { position: absolute; top: 8px; left: 8px; background: #ff4d4d; color: white; padding: 3px 7px; border-radius: 6px; font-size: 9px; font-weight: 800; z-index: 10; }
+.discount-tag { position: absolute; top: 8px; left: 8px; background: rgb(238, 100, 7); color: white; padding: 3px 7px; border-radius: 6px; font-size: 9px; font-weight: 800; z-index: 10; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
 #toast { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); color: white; padding: 12px 24px; border-radius: 50px; display: flex; align-items: center; gap: 10px; z-index: 1000; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 #toast.show { top: 20px; }
 
 .thumb-img { width: 60px; height: 60px; object-fit: contain; border-radius: 8px; cursor: pointer; border: 2px solid #f3f4f6; transition: 0.2s; background: white; flex-shrink: 0; }
-.thumb-img.active { border-color: #ee4d2d; transform: scale(1.05); }
+.thumb-img.active { border-color: #ee6407; transform: scale(1.05); }
 
 .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
 </style>
@@ -41,7 +41,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8f9fa; color:
 <header class="glass-header sticky top-0 z-50 border-b border-gray-100 px-5 py-4 flex justify-between items-center">
     <div>
         <p class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">COMPRE SEM SAIR DE CASA</p>
-        <h1 class="text-4xl font-extrabold tracking-tighter">JARDSON<span class="text-[#ee4d2d]">IMPORTS</span></h1>
+        <h1 class="text-4xl font-extrabold tracking-tighter">JARDSON<span class="text-[#ee6407]">IMPORTS</span></h1>
     </div>
     <button onclick="openModal('cart-modal')" class="relative p-2 bg-gray-100 rounded-full">
         <i class="fa-solid fa-cart-shopping"></i>
