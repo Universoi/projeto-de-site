@@ -8,18 +8,19 @@
   "theme_color": "#0066FF",
   "icons": [
     {
-      "src": "https://comerciodigital.pt/media/2383/loja-online.png?anchor=center&mode=crop&quality=85&rnd=132411858820000000",
+      "src": "https://st4.depositphotos.com/27893600/31535/v/450/depositphotos_315359124-stock-illustration-trolley-shopping-cart-logo-icon.jpg",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://comerciodigital.pt/media/2383/loja-online.png?anchor=center&mode=crop&quality=85&rnd=132411858820000000",
+      "src": "https://st4.depositphotos.com/27893600/31535/v/450/depositphotos_315359124-stock-illustration-trolley-shopping-cart-logo-icon.jpg",
       "sizes": "192x192",
       "type": "image/png"
     }
   ]
 }
+
 
 
 
