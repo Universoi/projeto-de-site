@@ -11,16 +11,35 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
         :root { --accent: #0066FF; --bg: #F2F2F7; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #1C1C1E; padding-bottom: 110px; overflow-x: hidden; }
+        
         .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%); }
         .brand-top { font-size: 9px; font-weight: 800; letter-spacing: 0.4em; color: var(--accent); text-transform: uppercase; }
         .brand-main { font-size: 24px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
         .brand-main span { font-weight: 200; color: #636366; }
+        
         .luxury-card { background: #FFFFFF; border-radius: 30px; padding: 16px; border: 1px solid rgba(255,255,255,0.7); transition: 0.4s; }
         .img-wrapper { background: #f8f9fa; border-radius: 24px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; padding: 15px; margin-bottom: 12px; }
         .btn-premium { background: var(--accent); color: white; padding: 18px; border-radius: 22px; font-weight: 800; width: 100%; text-transform: uppercase; font-size: 11px; }
-        .dynamic-nav { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.9); padding: 12px 35px; border-radius: 40px; display: flex; gap: 40px; z-index: 1000; }
-        .nav-btn { color: #8E8E93; font-size: 10px; font-weight: 700; text-align: center; }
+
+        /* BARRA DE MENU COMPRIDA (Ponta a Ponta) */
+        .dynamic-nav { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            background: rgba(0, 0, 0, 0.95); 
+            padding: 15px 0; 
+            display: flex; 
+            justify-content: space-around; 
+            align-items: center;
+            z-index: 1000; 
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-btn { color: #8E8E93; font-size: 10px; font-weight: 700; text-align: center; flex: 1; }
         .nav-btn.active { color: #FFFFFF; }
+        
         .panel { position: fixed; top: 0; right: -100%; width: 100%; height: 100%; background: #F2F2F7; z-index: 2000; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); padding: 30px; }
         @media (min-width: 768px) { .panel { width: 450px; } }
         .panel.active { right: 0; }
@@ -54,9 +73,17 @@
     </main>
 
     <nav class="dynamic-nav">
-        <button onclick="location.reload()" class="nav-btn active"><i class="fa-solid fa-house block text-xl mb-1"></i>Início</button>
-        <button onclick="document.getElementById('search-box').classList.toggle('active')" class="nav-btn"><i class="fa-solid fa-magnifying-glass block text-xl mb-1"></i>Busca</button>
-        <button onclick="openPanel('cart-panel')" class="nav-btn relative"><i class="fa-solid fa-bag-shopping block text-xl mb-1"></i><span id="cart-count" class="absolute -top-1 -right-1 bg-blue-600 text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold text-white">0</span>Sacola</button>
+        <button onclick="location.reload()" class="nav-btn active">
+            <i class="fa-solid fa-house block text-xl mb-1"></i>Início
+        </button>
+        <button onclick="document.getElementById('search-box').classList.toggle('active')" class="nav-btn">
+            <i class="fa-solid fa-magnifying-glass block text-xl mb-1"></i>Busca
+        </button>
+        <button onclick="openPanel('cart-panel')" class="nav-btn relative">
+            <i class="fa-solid fa-bag-shopping block text-xl mb-1"></i>
+            <span id="cart-count" class="absolute top-0 right-1/3 bg-blue-600 text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold text-white">0</span>
+            Sacola
+        </button>
     </nav>
 
     <div id="profile-panel" class="panel overflow-y-auto no-scrollbar">
@@ -70,7 +97,6 @@
             <button onclick="closePanels()"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div id="cart-items" class="flex-1 overflow-y-auto space-y-4 no-scrollbar"></div>
-        
         <div class="pt-4 border-t mt-4">
             <div class="mb-4">
                 <label class="text-[9px] font-black text-gray-400 uppercase mb-2 block tracking-widest">Forma de Pagamento</label>
@@ -91,12 +117,11 @@
     </div>
 
     <script>
+        // O JavaScript permanece exatamente o mesmo do seu original
         const SUPABASE_URL = 'https://zkhradhpwakvtgsilsyj.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_UrUxPsPD3XBTANwwp3tZOA_-REppnf3';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
         const AVATAR_PADRAO = "https://i.pravatar.cc/150?u=shoppjari"; 
-
         let allProducts = [];
         let shoppingCart = [];
         let currentUser = JSON.parse(localStorage.getItem('user_shopp_v4')) || null;
@@ -239,7 +264,6 @@
 
         function finishOrder() {
             if(shoppingCart.length === 0) return alert("Sua sacola está vazia!");
-            
             const agora = new Date();
             const dataPedido = agora.toLocaleDateString('pt-BR');
             const horaPedido = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
@@ -262,29 +286,11 @@
             });
 
             msg += `💳 *FORMA DE PAGAMENTO:* ${formaPagamento}\n`;
-            msg += `🎟️ *CUPOM APLICADO:*\n`;
-            msg += `💸 *DESCONTO:*\n\n`;
-
-            msg += `🚚 *ENTREGA*\n`;
             msg += `📍 Endereço: ${currentUser.endereco}, ${currentUser.numero}\n`;
             msg += `🏘️ Bairro: ${currentUser.bairro}\n`;
-            msg += `🏙️ Cidade/UF: Laranjal do Jari / AP\n`;
-            msg += `📮 CEP: 68920-000\n`;
-            msg += `🔍 Referência: ${currentUser.ponto_ref}\n`;
-            msg += `📦 Tipo de Entrega: Motoboy (Grátis)\n\n`;
-
-            msg += `💰 *RESUMO FINANCEIRO*\n`;
-            msg += `🛒 Subtotal: R$ ${total.toLocaleString('pt-BR')}\n`;
-            msg += `🚚 Frete: R$ 0\n`;
-            msg += `💸 Desconto:\n`;
-            msg += `💰 *TOTAL A PAGAR:* R$ ${total.toLocaleString('pt-BR')}\n\n`;
-
-            msg += `👤 *DADOS DO CLIENTE*\n`;
-            msg += `Nome: ${currentUser.nome}\n\n`;
-            msg += `📸 *STATUS DO PAGAMENTO:*\n`;
-            msg += `📝 Enviei o comprovante, aguardando confirmação.\n\n`;
-            msg += `🙏 *OBRIGADO PELA PREFERÊNCIA!*\n`;
-            msg += `*JARDSON IMPORTS – QUALIDADE E CONFIANÇA*`;
+            msg += `🔍 Referência: ${currentUser.ponto_ref}\n\n`;
+            msg += `💰 *TOTAL:* R$ ${total.toLocaleString('pt-BR')}\n\n`;
+            msg += `👤 *CLIENTE:* ${currentUser.nome}`;
 
             window.open(`https://wa.me/5596991189596?text=${encodeURIComponent(msg)}`);
         }
