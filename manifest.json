@@ -1,0 +1,17 @@
+{
+  "name": "Shopp Jari Exclusive",
+  "short_name": "ShoppJari",
+  "description": "Exclusive Shopping Experience",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F2F2F7",
+  "theme_color": "#0066FF",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3514/3514491.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
