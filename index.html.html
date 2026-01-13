@@ -10,7 +10,9 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
         :root { --accent: #0066FF; --bg: #F2F2F7; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #1C1C1E; padding-bottom: 110px; overflow-x: hidden; }
+        
+        /* AJUSTE: padding-bottom menor para acompanhar a barra menor */
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #1C1C1E; padding-bottom: 80px; overflow-x: hidden; }
         
         .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%); }
         .brand-top { font-size: 9px; font-weight: 800; letter-spacing: 0.4em; color: var(--accent); text-transform: uppercase; }
@@ -21,14 +23,14 @@
         .img-wrapper { background: #f8f9fa; border-radius: 24px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; padding: 15px; margin-bottom: 12px; }
         .btn-premium { background: var(--accent); color: white; padding: 18px; border-radius: 22px; font-weight: 800; width: 100%; text-transform: uppercase; font-size: 11px; }
 
-        /* BARRA DE MENU COMPRIDA (Ponta a Ponta) */
+        /* BARRA DE MENU OTIMIZADA (Mais baixa) */
         .dynamic-nav { 
             position: fixed; 
             bottom: 0; 
             left: 0; 
             width: 100%; 
             background: rgba(0, 0, 0, 0.95); 
-            padding: 15px 0; 
+            padding: 8px 0; /* Reduzido de 15px */
             display: flex; 
             justify-content: space-around; 
             align-items: center;
@@ -37,7 +39,8 @@
             border-top: 1px solid rgba(255,255,255,0.1);
         }
         
-        .nav-btn { color: #8E8E93; font-size: 10px; font-weight: 700; text-align: center; flex: 1; }
+        .nav-btn { color: #8E8E93; font-size: 9px; font-weight: 700; text-align: center; flex: 1; }
+        .nav-btn i { font-size: 18px; margin-bottom: 2px; display: block; } /* Ícones menores e margem ajustada */
         .nav-btn.active { color: #FFFFFF; }
         
         .panel { position: fixed; top: 0; right: -100%; width: 100%; height: 100%; background: #F2F2F7; z-index: 2000; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); padding: 30px; }
@@ -74,14 +77,14 @@
 
     <nav class="dynamic-nav">
         <button onclick="location.reload()" class="nav-btn active">
-            <i class="fa-solid fa-house block text-xl mb-1"></i>Início
+            <i class="fa-solid fa-house"></i>Início
         </button>
         <button onclick="document.getElementById('search-box').classList.toggle('active')" class="nav-btn">
-            <i class="fa-solid fa-magnifying-glass block text-xl mb-1"></i>Busca
+            <i class="fa-solid fa-magnifying-glass"></i>Busca
         </button>
         <button onclick="openPanel('cart-panel')" class="nav-btn relative">
-            <i class="fa-solid fa-bag-shopping block text-xl mb-1"></i>
-            <span id="cart-count" class="absolute top-0 right-1/3 bg-blue-600 text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold text-white">0</span>
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span id="cart-count" class="absolute top-[-2px] right-1/3 bg-blue-600 text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold text-white">0</span>
             Sacola
         </button>
     </nav>
@@ -117,7 +120,6 @@
     </div>
 
     <script>
-        // O JavaScript permanece exatamente o mesmo do seu original
         const SUPABASE_URL = 'https://zkhradhpwakvtgsilsyj.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_UrUxPsPD3XBTANwwp3tZOA_-REppnf3';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -219,7 +221,7 @@
                     <div class="gold-card mb-8">
                         <div class="flex items-center gap-4">
                             <img src="${AVATAR_PADRAO}" class="w-14 h-14 rounded-2xl object-cover border-2 border-white/20 shadow-lg">
-                            <div><h4 class="font-bold text-lg">${currentUser.nome}</h4><p class="text-[9px] text-blue-200 font-black uppercase tracking-widest">VIP MEMBER</p></div>
+                            <div><h4 class="font-bold text-lg">${currentUser.nome}</h4><p class="text-[9px] text-blue-200 font-black uppercase tracking-widest">Meu Cadastro</p></div>
                         </div>
                     </div>
                     <div class="space-y-3">
@@ -240,7 +242,7 @@
                             <div class="bg-white rounded-[22px] p-2 border"><div class="px-4 pt-2 text-[9px] font-black text-blue-600 uppercase">Bairro</div><input type="text" id="p-bairro" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent"></div>
                         </div>
                         <div class="bg-white rounded-[22px] p-2 border"><div class="px-4 pt-2 text-[9px] font-black text-blue-600 uppercase">Ponto de Referência</div><input type="text" id="p-ponto-ref" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent"></div>
-                        <button type="submit" class="btn-premium mt-6">CRIAR MEU PERFIL VIP</button>
+                        <button type="submit" class="btn-premium mt-6">CRIAR MEU PERFIL</button>
                     </form>`;
                 
                 document.getElementById('profile-form').onsubmit = (e) => { 
