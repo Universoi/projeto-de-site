@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shopp Jari | Exclusive Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
+        :root { --accent: #0066FF; --bg: #F2F2F7; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #1C1C1E; padding-bottom: 110px; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%); }
+        .brand-top { font-size: 9px; font-weight: 800; letter-spacing: 0.4em; color: var(--accent); text-transform: uppercase; }
+        .brand-main { font-size: 24px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+        .brand-main span { font-weight: 200; color: #636366; }
+        .luxury-card { background: #FFFFFF; border-radius: 30px; padding: 16px; border: 1px solid rgba(255,255,255,0.7); transition: 0.4s; }
+        .img-wrapper { background: #f8f9fa; border-radius: 24px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; padding: 15px; margin-bottom: 12px; }
+        .btn-premium { background: var(--accent); color: white; padding: 18px; border-radius: 22px; font-weight: 800; width: 100%; text-transform: uppercase; font-size: 11px; }
+        .dynamic-nav { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.9); padding: 12px 35px; border-radius: 40px; display: flex; gap: 40px; z-index: 1000; }
+        .nav-btn { color: #8E8E93; font-size: 10px; font-weight: 700; text-align: center; }
+        .nav-btn.active { color: #FFFFFF; }
+        .panel { position: fixed; top: 0; right: -100%; width: 100%; height: 100%; background: #F2F2F7; z-index: 2000; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); padding: 30px; }
+        @media (min-width: 768px) { .panel { width: 450px; } }
+        .panel.active { right: 0; }
+        .thumb-active { border: 2px solid var(--accent) !important; opacity: 1 !important; }
+        #search-box { max-height: 0; opacity: 0; overflow: hidden; transition: 0.4s ease; }
+        #search-box.active { max-height: 80px; opacity: 1; margin-top: 15px; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .gold-card { background: linear-gradient(135deg, #0066FF 0%, #0044AA 100%); color: white; padding: 20px; border-radius: 30px; }
+    </style>
+</head>
+<body>
+
+    <header class="glass sticky top-0 z-[100] px-6 py-6" id="main-header">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="cursor-pointer" onclick="location.reload()">
+                <p class="brand-top italic">Exclusive Store</p>
+                <h1 class="brand-main">SHOPP<span>JARI</span></h1>
+            </div>
+            <button onclick="openPanel('profile-panel')" class="w-11 h-11 bg-white rounded-2xl flex items-center justify-center shadow-sm border border-gray-100">
+                <i class="fa-solid fa-user-ninja text-gray-800"></i>
+            </button>
+        </div>
+        <div id="search-box" class="max-w-6xl mx-auto">
+            <input type="text" id="search-input" oninput="liveSearch()" placeholder="O que você deseja hoje?" class="w-full p-4 bg-gray-100 rounded-2xl outline-none font-semibold">
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 pt-8">
+        <h2 class="text-4xl font-extrabold tracking-tighter mb-8 italic">Seu próximo <br><span class="text-blue-600">desejo está aqui.</span></h2>
+        <div id="vitrine" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+    </main>
+
+    <nav class="dynamic-nav">
+        <button onclick="location.reload()" class="nav-btn active"><i class="fa-solid fa-house block text-xl mb-1"></i>Início</button>
+        <button onclick="document.getElementById('search-box').classList.toggle('active')" class="nav-btn"><i class="fa-solid fa-magnifying-glass block text-xl mb-1"></i>Busca</button>
+        <button onclick="openPanel('cart-panel')" class="nav-btn relative"><i class="fa-solid fa-bag-shopping block text-xl mb-1"></i><span id="cart-count" class="absolute -top-1 -right-1 bg-blue-600 text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold text-white">0</span>Sacola</button>
+    </nav>
+
+    <div id="profile-panel" class="panel overflow-y-auto no-scrollbar">
+        <button onclick="closePanels()" class="mb-8 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm"><i class="fa-solid fa-xmark"></i></button>
+        <div id="profile-content"></div>
+    </div>
+
+    <div id="cart-panel" class="panel flex flex-col">
+        <div class="flex justify-between items-center mb-8">
+            <h3 class="text-2xl font-black italic uppercase">Sacola</h3>
+            <button onclick="closePanels()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto space-y-4 no-scrollbar"></div>
+        
+        <div class="pt-4 border-t mt-4">
+            <div class="mb-4">
+                <label class="text-[9px] font-black text-gray-400 uppercase mb-2 block tracking-widest">Forma de Pagamento</label>
+                <select id="payment-method" class="w-full p-3 bg-white rounded-xl border font-bold text-sm outline-none">
+                    <option value="PIX">PIX (Envio imediato)</option>
+                    <option value="Cartão de Crédito">Cartão de Crédito</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                </select>
+            </div>
+            <div class="flex justify-between mb-6"><span class="text-gray-400 font-bold uppercase text-[10px]">Total</span><span id="total-price" class="text-3xl font-black">R$ 0,00</span></div>
+            <button onclick="finishOrder()" class="btn-premium">FINALIZAR NO WHATSAPP</button>
+        </div>
+    </div>
+
+    <div id="product-panel" class="panel overflow-y-auto no-scrollbar">
+        <button onclick="closePanels()" class="mb-6 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm"><i class="fa-solid fa-chevron-left"></i></button>
+        <div id="product-content"></div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://qqspmuaukoaetilbaflv.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_DN831m2SDg4cVvfn8Vc0pA_VZGfs_9u';
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const AVATAR_PADRAO = "https://i.pravatar.cc/150?u=shoppjari"; 
+
+        let allProducts = [];
+        let shoppingCart = [];
+        let currentUser = JSON.parse(localStorage.getItem('user_shopp_v4')) || null;
+
+        async function init() {
+            const { data } = await _supabase.from('produtos').select('*');
+            allProducts = data || [];
+            renderVitrine(allProducts);
+            renderProfileUI();
+        }
+
+        function renderVitrine(list) {
+            document.getElementById('vitrine').innerHTML = list.map(p => {
+                const img = Array.isArray(p.images) ? p.images[0] : p.images;
+                const hasPromo = p.promo_price && p.promo_price > 0;
+                return `
+                <div class="luxury-card cursor-pointer" onclick="openProduct('${p.id}')">
+                    <div class="img-wrapper"><img src="${img}" class="max-h-full object-contain"></div>
+                    <span class="text-[8px] font-black text-blue-600 uppercase tracking-widest">${p.category}</span>
+                    <h4 class="font-bold text-sm leading-tight mt-1 line-clamp-2">${p.name}</h4>
+                    <div class="mt-3">
+                        ${hasPromo ? `
+                            <span class="text-[10px] text-gray-400 line-through">R$ ${Number(p.price).toLocaleString('pt-br')}</span>
+                            <p class="text-lg font-black text-blue-600 leading-none">R$ ${Number(p.promo_price).toLocaleString('pt-br')}</p>
+                        ` : `
+                            <p class="text-lg font-black mt-3">R$ ${Number(p.price).toLocaleString('pt-br')}</p>
+                        `}
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function openProduct(id) {
+            const p = allProducts.find(x => String(x.id) === String(id));
+            if(!p) return;
+            const imgs = Array.isArray(p.images) ? p.images : [p.images];
+            const hasPromo = p.promo_price && p.promo_price > 0;
+
+            document.getElementById('product-content').innerHTML = `
+                <div class="space-y-6 pb-20">
+                    <div class="bg-white rounded-[40px] p-8 flex items-center justify-center h-80 shadow-sm"><img id="main-photo" src="${imgs[0]}" class="max-h-full object-contain"></div>
+                    <div class="flex gap-3 overflow-x-auto no-scrollbar py-2">
+                        ${imgs.map((img, i) => `<div onclick="changePhoto('${img}', this)" class="w-20 h-20 bg-white rounded-2xl border-2 border-transparent p-2 cursor-pointer flex-shrink-0 opacity-60 ${i===0?'thumb-active':''}"><img src="${img}" class="w-full h-full object-contain"></div>`).join('')}
+                    </div>
+                    <h2 class="text-3xl font-black tracking-tight">${p.name}</h2>
+                    <div>
+                        ${hasPromo ? `
+                            <span class="text-sm text-gray-400 line-through">De R$ ${Number(p.price).toLocaleString('pt-br')}</span>
+                            <p class="text-4xl font-black text-blue-600">Por R$ ${Number(p.promo_price).toLocaleString('pt-br')}</p>
+                        ` : `
+                            <p class="text-4xl font-black text-blue-600">R$ ${Number(p.price).toLocaleString('pt-br')}</p>
+                        `}
+                    </div>
+                    <p class="text-gray-500 font-medium">${p.description || ''}</p>
+                    <button onclick="addToCart('${p.id}')" class="btn-premium">ADICIONAR À SACOLA</button>
+                </div>`;
+            openPanel('product-panel');
+        }
+
+        function changePhoto(url, el) {
+            document.getElementById('main-photo').src = url;
+            document.querySelectorAll('.thumb-active').forEach(t => t.classList.remove('thumb-active'));
+            el.classList.add('thumb-active');
+        }
+
+        function addToCart(id) {
+            if(!currentUser) { 
+                alert("Por favor, preencha seu perfil antes de comprar.");
+                closePanels(); openPanel('profile-panel'); 
+                return; 
+            }
+            const product = allProducts.find(p => String(p.id) === String(id));
+            if(product) { shoppingCart.push(product); updateCartUI(); closePanels(); openPanel('cart-panel'); }
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = shoppingCart.length;
+            let total = 0;
+            document.getElementById('cart-items').innerHTML = shoppingCart.map((item, i) => {
+                const price = item.promo_price && item.promo_price > 0 ? item.promo_price : item.price;
+                total += Number(price);
+                return `<div class="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm">
+                    <img src="${Array.isArray(item.images)?item.images[0]:item.images}" class="w-12 h-12 object-contain">
+                    <div class="flex-1"><h4 class="font-bold text-xs">${item.name}</h4><p class="font-black text-blue-600">R$ ${Number(price).toLocaleString('pt-br')}</p></div>
+                    <button onclick="shoppingCart.splice(${i},1); updateCartUI();" class="text-gray-300"><i class="fa-solid fa-trash-can"></i></button>
+                </div>`;
+            }).join('');
+            document.getElementById('total-price').innerText = `R$ ${total.toLocaleString('pt-br', {minimumFractionDigits: 2})}`;
+        }
+
+        function renderProfileUI() {
+            const div = document.getElementById('profile-content');
+            if(currentUser) {
+                div.innerHTML = `
+                    <div class="gold-card mb-8">
+                        <div class="flex items-center gap-4">
+                            <img src="${AVATAR_PADRAO}" class="w-14 h-14 rounded-2xl object-cover border-2 border-white/20 shadow-lg">
+                            <div><h4 class="font-bold text-lg">${currentUser.nome}</h4><p class="text-[9px] text-blue-200 font-black uppercase tracking-widest">VIP MEMBER</p></div>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded-2xl border flex items-center gap-4"><i class="fa-solid fa-road text-blue-600"></i><div><p class="text-[9px] font-bold text-gray-400 uppercase">Rua</p><p class="text-sm font-bold">${currentUser.endereco}, ${currentUser.numero}</p></div></div>
+                        <div class="bg-white p-4 rounded-2xl border flex items-center gap-4"><i class="fa-solid fa-map text-indigo-600"></i><div><p class="text-[9px] font-bold text-gray-400 uppercase">Bairro</p><p class="text-sm font-bold">${currentUser.bairro}</p></div></div>
+                        <div class="bg-white p-4 rounded-2xl border flex items-center gap-4"><i class="fa-solid fa-location-crosshairs text-orange-600"></i><div><p class="text-[9px] font-bold text-gray-400 uppercase">Referência</p><p class="text-sm font-bold">${currentUser.ponto_ref}</p></div></div>
+                    </div>
+                    <button onclick="localStorage.removeItem('user_shopp_v4'); location.reload();" class="w-full mt-10 py-4 text-red-500 font-bold text-[10px] uppercase text-center">Alterar Perfil</button>`;
+            } else {
+                div.innerHTML = `
+                    <div class="flex justify-center mb-6"><div class="relative"><img src="${AVATAR_PADRAO}" class="w-24 h-24 rounded-[32px] border-4 border-white shadow-xl object-cover"></div></div>
+                    <div class="text-center mb-8"><h4 class="text-3xl font-black tracking-tighter">Sua Identidade</h4><p class="text-gray-400 text-sm mt-1">Dados para entrega exclusiva.</p></div>
+                    <form id="profile-form" class="space-y-4">
+                        <div class="bg-white rounded-[22px] p-2 border"><div class="px-4 pt-2 text-[9px] font-black text-blue-600 uppercase">Nome Completo</div><input type="text" id="p-nome" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent"></div>
+                        <div class="bg-white rounded-[22px] p-2 border"><div class="px-4 pt-2 text-[9px] font-black text-blue-600 uppercase">Rua</div><input type="text" id="p-endereco" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent"></div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white rounded-[22px] p-2 border"><div class="px-4 pt-2 text-[9px] font-black text-blue-600 uppercase">Número</div><input type="text" id="p-numero" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent"></div>
+                            <div class="bg-white rounded-[22px] p-2 border"><div class="px-4 pt-2 text-[9px] font-black text-blue-600 uppercase">Bairro</div><input type="text" id="p-bairro" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent"></div>
+                        </div>
+                        <div class="bg-white rounded-[22px] p-2 border"><div class="px-4 pt-2 text-[9px] font-black text-blue-600 uppercase">Ponto de Referência</div><input type="text" id="p-ponto-ref" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent"></div>
+                        <button type="submit" class="btn-premium mt-6">CRIAR MEU PERFIL VIP</button>
+                    </form>`;
+                
+                document.getElementById('profile-form').onsubmit = (e) => { 
+                    e.preventDefault(); 
+                    currentUser = { 
+                        nome: document.getElementById('p-nome').value, 
+                        endereco: document.getElementById('p-endereco').value, 
+                        numero: document.getElementById('p-numero').value, 
+                        bairro: document.getElementById('p-bairro').value, 
+                        ponto_ref: document.getElementById('p-ponto-ref').value 
+                    }; 
+                    localStorage.setItem('user_shopp_v4', JSON.stringify(currentUser)); 
+                    renderProfileUI(); 
+                };
+            }
+        }
+
+        function openPanel(id) { document.getElementById(id).classList.add('active'); }
+        function closePanels() { document.querySelectorAll('.panel').forEach(p => p.classList.remove('active')); }
+        function liveSearch() { const q = document.getElementById('search-input').value.toLowerCase(); renderVitrine(allProducts.filter(p => p.name.toLowerCase().includes(q))); }
+
+        function finishOrder() {
+            if(shoppingCart.length === 0) return alert("Sua sacola está vazia!");
+            
+            const agora = new Date();
+            const dataPedido = agora.toLocaleDateString('pt-BR');
+            const horaPedido = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            const numeroPedido = Math.floor(1000 + Math.random() * 9000);
+            const formaPagamento = document.getElementById('payment-method').value;
+
+            let msg = `🚀 *NOVO PEDIDO - JARDSON IMPORTS*\n\n`;
+            msg += `📅 *DATA DO PEDIDO:* ${dataPedido}\n`;
+            msg += `⏰ *HORÁRIO:* ${horaPedido}\n`;
+            msg += `🆔 *Nº DO PEDIDO:* #${numeroPedido}\n\n`;
+            msg += `📦 *ITENS DO PEDIDO:*\n`;
+
+            let total = 0;
+            shoppingCart.forEach(p => {
+                const preco = p.promo_price > 0 ? p.promo_price : p.price;
+                total += Number(preco);
+                msg += `• Produto: ${p.name}\n`;
+                msg += `  └ Quantidade: 1\n`;
+                msg += `  └ Valor Unitário: R$ ${Number(preco).toLocaleString('pt-BR')}\n\n`;
+            });
+
+            msg += `💳 *FORMA DE PAGAMENTO:* ${formaPagamento}\n`;
+            msg += `🎟️ *CUPOM APLICADO:*\n`;
+            msg += `💸 *DESCONTO:*\n\n`;
+
+            msg += `🚚 *ENTREGA*\n`;
+            msg += `📍 Endereço: ${currentUser.endereco}, ${currentUser.numero}\n`;
+            msg += `🏘️ Bairro: ${currentUser.bairro}\n`;
+            msg += `🏙️ Cidade/UF: Laranjal do Jari / AP\n`;
+            msg += `📮 CEP: 68920-000\n`;
+            msg += `🔍 Referência: ${currentUser.ponto_ref}\n`;
+            msg += `📦 Tipo de Entrega: Motoboy (Grátis)\n\n`;
+
+            msg += `💰 *RESUMO FINANCEIRO*\n`;
+            msg += `🛒 Subtotal: R$ ${total.toLocaleString('pt-BR')}\n`;
+            msg += `🚚 Frete: R$ 0\n`;
+            msg += `💸 Desconto:\n`;
+            msg += `💰 *TOTAL A PAGAR:* R$ ${total.toLocaleString('pt-BR')}\n\n`;
+
+            msg += `👤 *DADOS DO CLIENTE*\n`;
+            msg += `Nome: ${currentUser.nome}\n\n`;
+            msg += `📸 *STATUS DO PAGAMENTO:*\n`;
+            msg += `📝 Enviei o comprovante, aguardando confirmação.\n\n`;
+            msg += `🙏 *OBRIGADO PELA PREFERÊNCIA!*\n`;
+            msg += `*JARDSON IMPORTS – QUALIDADE E CONFIANÇA*`;
+
+            window.open(`https://wa.me/5596991189596?text=${encodeURIComponent(msg)}`);
+        }
+
+        init();
+    </script>
+</body>
+</html>
