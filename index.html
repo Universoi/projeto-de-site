@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Shopp Jari | Exclusive Experience</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0066FF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3514/3514491.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -70,7 +77,6 @@
             <button onclick="closePanels()"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div id="cart-items" class="flex-1 overflow-y-auto space-y-4 no-scrollbar"></div>
-        
         <div class="pt-4 border-t mt-4">
             <div class="mb-4">
                 <label class="text-[9px] font-black text-gray-400 uppercase mb-2 block tracking-widest">Forma de Pagamento</label>
@@ -91,10 +97,16 @@
     </div>
 
     <script>
+        // ATIVAÇÃO DO PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+
         const SUPABASE_URL = 'https://qqspmuaukoaetilbaflv.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_DN831m2SDg4cVvfn8Vc0pA_VZGfs_9u';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
         const AVATAR_PADRAO = "https://i.pravatar.cc/150?u=shoppjari"; 
 
         let allProducts = [];
@@ -134,7 +146,6 @@
             if(!p) return;
             const imgs = Array.isArray(p.images) ? p.images : [p.images];
             const hasPromo = p.promo_price && p.promo_price > 0;
-
             document.getElementById('product-content').innerHTML = `
                 <div class="space-y-6 pb-20">
                     <div class="bg-white rounded-[40px] p-8 flex items-center justify-center h-80 shadow-sm"><img id="main-photo" src="${imgs[0]}" class="max-h-full object-contain"></div>
@@ -143,12 +154,7 @@
                     </div>
                     <h2 class="text-3xl font-black tracking-tight">${p.name}</h2>
                     <div>
-                        ${hasPromo ? `
-                            <span class="text-sm text-gray-400 line-through">De R$ ${Number(p.price).toLocaleString('pt-br')}</span>
-                            <p class="text-4xl font-black text-blue-600">Por R$ ${Number(p.promo_price).toLocaleString('pt-br')}</p>
-                        ` : `
-                            <p class="text-4xl font-black text-blue-600">R$ ${Number(p.price).toLocaleString('pt-br')}</p>
-                        `}
+                        ${hasPromo ? `<p class="text-4xl font-black text-blue-600">R$ ${Number(p.promo_price).toLocaleString('pt-br')}</p>` : `<p class="text-4xl font-black text-blue-600">R$ ${Number(p.price).toLocaleString('pt-br')}</p>`}
                     </div>
                     <p class="text-gray-500 font-medium">${p.description || ''}</p>
                     <button onclick="addToCart('${p.id}')" class="btn-premium">ADICIONAR À SACOLA</button>
@@ -164,7 +170,7 @@
 
         function addToCart(id) {
             if(!currentUser) { 
-                alert("Por favor, preencha seu perfil antes de comprar.");
+                alert("Preencha seu perfil para comprar.");
                 closePanels(); openPanel('profile-panel'); 
                 return; 
             }
@@ -176,7 +182,7 @@
             document.getElementById('cart-count').innerText = shoppingCart.length;
             let total = 0;
             document.getElementById('cart-items').innerHTML = shoppingCart.map((item, i) => {
-                const price = item.promo_price && item.promo_price > 0 ? item.promo_price : item.price;
+                const price = item.promo_price > 0 ? item.promo_price : item.price;
                 total += Number(price);
                 return `<div class="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm">
                     <img src="${Array.isArray(item.images)?item.images[0]:item.images}" class="w-12 h-12 object-contain">
@@ -190,41 +196,25 @@
         function renderProfileUI() {
             const div = document.getElementById('profile-content');
             if(currentUser) {
-                div.innerHTML = `
-                    <div class="gold-card mb-8">
-                        <div class="flex items-center gap-4">
-                            <img src="${AVATAR_PADRAO}" class="w-14 h-14 rounded-2xl object-cover border-2 border-white/20 shadow-lg">
-                            <div><h4 class="font-bold text-lg">${currentUser.nome}</h4><p class="text-[9px] text-blue-200 font-black uppercase tracking-widest">VIP MEMBER</p></div>
-                        </div>
-                    </div>
-                    <div class="space-y-3">
-                        <div class="bg-white p-4 rounded-2xl border flex items-center gap-4"><i class="fa-solid fa-road text-blue-600"></i><div><p class="text-[9px] font-bold text-gray-400 uppercase">Rua</p><p class="text-sm font-bold">${currentUser.endereco}, ${currentUser.numero}</p></div></div>
-                        <div class="bg-white p-4 rounded-2xl border flex items-center gap-4"><i class="fa-solid fa-map text-indigo-600"></i><div><p class="text-[9px] font-bold text-gray-400 uppercase">Bairro</p><p class="text-sm font-bold">${currentUser.bairro}</p></div></div>
-                        <div class="bg-white p-4 rounded-2xl border flex items-center gap-4"><i class="fa-solid fa-location-crosshairs text-orange-600"></i><div><p class="text-[9px] font-bold text-gray-400 uppercase">Referência</p><p class="text-sm font-bold">${currentUser.ponto_ref}</p></div></div>
-                    </div>
-                    <button onclick="localStorage.removeItem('user_shopp_v4'); location.reload();" class="w-full mt-10 py-4 text-red-500 font-bold text-[10px] uppercase text-center">Alterar Perfil</button>`;
+                div.innerHTML = `<div class="gold-card mb-8"><h4 class="font-bold text-lg">${currentUser.nome}</h4><p class="text-[9px]">VIP MEMBER</p></div>
+                <button onclick="localStorage.removeItem('user_shopp_v4'); location.reload();" class="w-full text-red-500 font-bold text-[10px] uppercase">Alterar Perfil</button>`;
             } else {
                 div.innerHTML = `
-                    <div class="flex justify-center mb-6"><div class="relative"><img src="${AVATAR_PADRAO}" class="w-24 h-24 rounded-[32px] border-4 border-white shadow-xl object-cover"></div></div>
-                    <div class="text-center mb-8"><h4 class="text-3xl font-black tracking-tighter">Sua Identidade</h4><p class="text-gray-400 text-sm mt-1">Dados para entrega exclusiva.</p></div>
-                    <form id="profile-form" class="space-y-4">
-                        <div class="bg-white rounded-[22px] p-2 border"><div class="px-4 pt-2 text-[9px] font-black text-blue-600 uppercase">Nome Completo</div><input type="text" id="p-nome" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent"></div>
-                        <div class="bg-white rounded-[22px] p-2 border"><div class="px-4 pt-2 text-[9px] font-black text-blue-600 uppercase">Rua</div><input type="text" id="p-endereco" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent"></div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white rounded-[22px] p-2 border"><div class="px-4 pt-2 text-[9px] font-black text-blue-600 uppercase">Número</div><input type="text" id="p-numero" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent"></div>
-                            <div class="bg-white rounded-[22px] p-2 border"><div class="px-4 pt-2 text-[9px] font-black text-blue-600 uppercase">Bairro</div><input type="text" id="p-bairro" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent"></div>
-                        </div>
-                        <div class="bg-white rounded-[22px] p-2 border"><div class="px-4 pt-2 text-[9px] font-black text-blue-600 uppercase">Ponto de Referência</div><input type="text" id="p-ponto-ref" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent"></div>
-                        <button type="submit" class="btn-premium mt-6">CRIAR MEU PERFIL VIP</button>
-                    </form>`;
-                
+                <form id="profile-form" class="space-y-4">
+                    <input type="text" id="p-nome" placeholder="Nome Completo" required class="w-full p-4 bg-white rounded-2xl border outline-none font-bold">
+                    <input type="text" id="p-endereco" placeholder="Rua" required class="w-full p-4 bg-white rounded-2xl border outline-none font-bold">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" id="p-numero" placeholder="Nº" required class="w-full p-4 bg-white rounded-2xl border outline-none font-bold">
+                        <input type="text" id="p-bairro" placeholder="Bairro" required class="w-full p-4 bg-white rounded-2xl border outline-none font-bold">
+                    </div>
+                    <input type="text" id="p-ponto-ref" placeholder="Ponto de Referência" required class="w-full p-4 bg-white rounded-2xl border outline-none font-bold">
+                    <button type="submit" class="btn-premium">CRIAR PERFIL</button>
+                </form>`;
                 document.getElementById('profile-form').onsubmit = (e) => { 
                     e.preventDefault(); 
                     currentUser = { 
-                        nome: document.getElementById('p-nome').value, 
-                        endereco: document.getElementById('p-endereco').value, 
-                        numero: document.getElementById('p-numero').value, 
-                        bairro: document.getElementById('p-bairro').value, 
+                        nome: document.getElementById('p-nome').value, endereco: document.getElementById('p-endereco').value, 
+                        numero: document.getElementById('p-numero').value, bairro: document.getElementById('p-bairro').value, 
                         ponto_ref: document.getElementById('p-ponto-ref').value 
                     }; 
                     localStorage.setItem('user_shopp_v4', JSON.stringify(currentUser)); 
@@ -238,57 +228,17 @@
         function liveSearch() { const q = document.getElementById('search-input').value.toLowerCase(); renderVitrine(allProducts.filter(p => p.name.toLowerCase().includes(q))); }
 
         function finishOrder() {
-            if(shoppingCart.length === 0) return alert("Sua sacola está vazia!");
-            
-            const agora = new Date();
-            const dataPedido = agora.toLocaleDateString('pt-BR');
-            const horaPedido = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-            const numeroPedido = Math.floor(1000 + Math.random() * 9000);
-            const formaPagamento = document.getElementById('payment-method').value;
-
-            let msg = `🚀 *NOVO PEDIDO - JARDSON IMPORTS*\n\n`;
-            msg += `📅 *DATA DO PEDIDO:* ${dataPedido}\n`;
-            msg += `⏰ *HORÁRIO:* ${horaPedido}\n`;
-            msg += `🆔 *Nº DO PEDIDO:* #${numeroPedido}\n\n`;
-            msg += `📦 *ITENS DO PEDIDO:*\n`;
-
+            if(shoppingCart.length === 0) return alert("Sacola vazia!");
             let total = 0;
+            let itens = "";
             shoppingCart.forEach(p => {
                 const preco = p.promo_price > 0 ? p.promo_price : p.price;
                 total += Number(preco);
-                msg += `• Produto: ${p.name}\n`;
-                msg += `  └ Quantidade: 1\n`;
-                msg += `  └ Valor Unitário: R$ ${Number(preco).toLocaleString('pt-BR')}\n\n`;
+                itens += `• ${p.name} - R$ ${Number(preco).toLocaleString('pt-BR')}\n`;
             });
-
-            msg += `💳 *FORMA DE PAGAMENTO:* ${formaPagamento}\n`;
-            msg += `🎟️ *CUPOM APLICADO:*\n`;
-            msg += `💸 *DESCONTO:*\n\n`;
-
-            msg += `🚚 *ENTREGA*\n`;
-            msg += `📍 Endereço: ${currentUser.endereco}, ${currentUser.numero}\n`;
-            msg += `🏘️ Bairro: ${currentUser.bairro}\n`;
-            msg += `🏙️ Cidade/UF: Laranjal do Jari / AP\n`;
-            msg += `📮 CEP: 68920-000\n`;
-            msg += `🔍 Referência: ${currentUser.ponto_ref}\n`;
-            msg += `📦 Tipo de Entrega: Motoboy (Grátis)\n\n`;
-
-            msg += `💰 *RESUMO FINANCEIRO*\n`;
-            msg += `🛒 Subtotal: R$ ${total.toLocaleString('pt-BR')}\n`;
-            msg += `🚚 Frete: R$ 0\n`;
-            msg += `💸 Desconto:\n`;
-            msg += `💰 *TOTAL A PAGAR:* R$ ${total.toLocaleString('pt-BR')}\n\n`;
-
-            msg += `👤 *DADOS DO CLIENTE*\n`;
-            msg += `Nome: ${currentUser.nome}\n\n`;
-            msg += `📸 *STATUS DO PAGAMENTO:*\n`;
-            msg += `📝 Enviei o comprovante, aguardando confirmação.\n\n`;
-            msg += `🙏 *OBRIGADO PELA PREFERÊNCIA!*\n`;
-            msg += `*JARDSON IMPORTS – QUALIDADE E CONFIANÇA*`;
-
+            let msg = `🚀 *NOVO PEDIDO - SHOPP JARI*\n\n${itens}\n*TOTAL:* R$ ${total.toLocaleString('pt-BR')}\n\n*CLIENTE:* ${currentUser.nome}\n*ENDEREÇO:* ${currentUser.endereco}, ${currentUser.numero} - ${currentUser.bairro}`;
             window.open(`https://wa.me/5596991189596?text=${encodeURIComponent(msg)}`);
         }
-
         init();
     </script>
 </body>
