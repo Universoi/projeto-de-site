@@ -1,8 +1,8 @@
 {
   "name": "Shopp Jari Exclusive",
   "short_name": "ShoppJari",
-  "description": "Exclusive Shopping Experience",
-  "start_url": "./",
+  "description": "Sua vitrine de importados exclusiva",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#F2F2F7",
   "theme_color": "#0066FF",
@@ -12,6 +12,11 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3514/3514211.png",
+      "sizes": "192x192",
+      "type": "image/png"
     }
   ]
 }
