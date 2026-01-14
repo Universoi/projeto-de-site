@@ -1,8 +1,11 @@
-// sw.js
 self.addEventListener('install', (e) => {
-    self.skipWaiting();
+  self.skipWaiting();
 });
 
 self.addEventListener('fetch', (event) => {
-    // Esse evento vazio é o que libera a instalação no Chrome
+  event.respondWith(
+    fetch(event.request).catch(() => {
+      return new Response("Offline");
+    })
+  );
 });
