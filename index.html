@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Shopp Jari | Exclusive Experience</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0066FF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://i.pravatar.cc/192?u=shoppjari">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
         :root { --accent: #0066FF; --bg: #F2F2F7; }
@@ -70,7 +78,6 @@
             <button onclick="closePanels()"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div id="cart-items" class="flex-1 overflow-y-auto space-y-4 no-scrollbar"></div>
-        
         <div class="pt-4 border-t mt-4">
             <div class="mb-4">
                 <label class="text-[9px] font-black text-gray-400 uppercase mb-2 block tracking-widest">Forma de Pagamento</label>
@@ -91,6 +98,13 @@
     </div>
 
     <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW error', err));
+            });
+        }
+
         const SUPABASE_URL = 'https://zkhradhpwakvtgsilsyj.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_UrUxPsPD3XBTANwwp3tZOA_-REppnf3';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
