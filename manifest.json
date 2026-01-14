@@ -7,12 +7,13 @@
   "theme_color": "#00FF66",
   "icons": [
     {
-      "src": "https://media.licdn.com/dms/image/v2/D4D0BAQEeAc18WggJWQ/company-logo_200_200/company-logo_200_200/0/1698698046178/alcateia_engenharia_de_sistemas_logo?e=2147483647&v=beta&t=ZTl-RKytXMgpJgmUtVVYm5oKyxd6ySZa0b5YZdR5LJc",
+      "src": "https://cdn-icons-png.flaticon.com/128/2964/2964514.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ]
 }
+
 
 
