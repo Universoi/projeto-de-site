@@ -9,15 +9,16 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://i.pravatar.cc/192?u=shoppjari",
+      "src": "https://img.freepik.com/vetores-premium/modelo-de-vetor-de-logotipo-de-carrinho-de-compras-azul_591497-165.jpg",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://i.pravatar.cc/512?u=shoppjari",
+      "src": "https://img.freepik.com/vetores-premium/modelo-de-vetor-de-logotipo-de-carrinho-de-compras-azul_591497-165.jpg",
       "sizes": "512x512",
       "type": "image/png"
     }
   ]
 }
+
