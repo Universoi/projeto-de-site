@@ -1,15 +1,17 @@
 {
   "name": "ALCATEIA | Edição Green",
   "short_name": "Alcateia",
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#050505",
   "theme_color": "#00FF66",
+  "scope": "/",
   "icons": [
     {
       "src": "https://cdn-icons-png.flaticon.com/512/1085/1085419.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
