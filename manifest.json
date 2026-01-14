@@ -1,24 +1,15 @@
 {
-  "name": "Shopp Jari Exclusive",
-  "short_name": "Shopp Jari",
-  "description": "Sua loja exclusiva em Laranjal do Jari",
-  "start_url": "./index.html",
+  "name": "ALCATEIA | Edição Green",
+  "short_name": "Alcateia",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#F2F2F7",
-  "theme_color": "#0066FF",
-  "orientation": "portrait",
+  "background_color": "#050505",
+  "theme_color": "#00FF66",
   "icons": [
     {
-      "src": "https://img.freepik.com/vetores-premium/modelo-de-vetor-de-logotipo-de-carrinho-de-compras-azul_591497-165.jpg",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "https://img.freepik.com/vetores-premium/modelo-de-vetor-de-logotipo-de-carrinho-de-compras-azul_591497-165.jpg",
+      "src": "https://cdn-icons-png.flaticon.com/512/1085/1085419.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ]
 }
-
