@@ -2,472 +2,243 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SHOPP STORE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALCATEIA | Edição Green</title>
     
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0066FF">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="https://img.freepik.com/vetores-premium/modelo-de-vetor-de-logotipo-de-carrinho-de-compras-azul_591497-165.jpg">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="theme-color" content="#00FF66">
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+      }
+    </script>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        :root {
+            --primary: #00FF66; 
+            --primary-glow: rgba(0, 255, 102, 0.4);
+            --bg: #050505;
+            --card: #0D0D0D;
+            --text: #fff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+
+        /* --- NAVEGAÇÃO --- */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 8%; position: fixed; width: 100%; z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            backdrop-filter: blur(10px);
+        }
+        .logo { font-family: 'Syncopate'; font-size: 1.5rem; color: var(--primary); text-decoration: none; font-weight: 800; }
+        .logo span { color: white; }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,1)), 
+                        url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; text-align: center; 
+            padding: 120px 20px 60px;
+        }
+        .hero-content h1 { font-family: 'Syncopate'; font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px; }
+        .hero-content p { color: #888; font-size: 1.1rem; margin-bottom: 35px; max-width: 600px; margin-inline: auto; }
+
+        /* --- INFO CARDS --- */
+        .info-grid { 
+            padding: 40px 8% 100px; 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; 
+        }
+        .info-card { background: var(--card); padding: 40px; border-radius: 24px; border: 1px solid #1a1a1a; transition: 0.3s; }
+        .info-card:hover { border-color: var(--primary); transform: translateY(-10px); }
+        .info-card i { color: var(--primary); margin-bottom: 20px; }
+        .info-card h3 { 
+            font-family: 'Syncopate'; 
+            font-size: 0.9rem; 
+            margin-bottom: 15px; 
+            color: var(--primary); 
+        }
+        .info-card p { color: #888; line-height: 1.6; }
+
+        /* --- TABELA DE PREÇOS --- */
+        .pricing { padding: 100px 8%; background: #080808; text-align: center; }
+        .pricing-title { font-family: 'Syncopate'; margin-bottom: 60px; font-size: 2rem; color: white; }
+        .price-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 40px; max-width: 1200px; margin: 0 auto; 
+        }
         
-        :root { 
-            --accent: #0066FF; 
-            --bg: #F8F9FB; 
-            --card-bg: #FFFFFF;
+        .p-card { 
+            background: var(--card); padding: 50px 30px; border-radius: 30px; border: 1px solid #1a1a1a; 
+            position: relative; transition: 0.4s; text-align: left;
         }
-
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--bg); 
-            color: #1A1A1E; 
-            padding-bottom: 120px; 
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
+        .p-card.featured { border-color: var(--primary); transform: scale(1.05); box-shadow: 0 0 40px rgba(0, 255, 102, 0.15); }
+        .p-card.featured::after { 
+            content: "MAIS ESCOLHIDO"; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: black; padding: 5px 15px; border-radius: 50px; font-weight: 800; font-size: 0.7rem;
         }
-
-        /* Glassmorphism Refinado */
-        .glass { 
-            background: rgba(255, 255, 255, 0.85); 
-            backdrop-filter: blur(20px) saturate(160%); 
-            -webkit-backdrop-filter: blur(20px) saturate(160%); 
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .brand-top { 
-            font-size: 10px; 
-            font-weight: 800; 
-            letter-spacing: 0.3em; 
-            color: var(--accent); 
-            text-transform: uppercase; 
-            margin-bottom: -2px;
-        }
-
-        .brand-main { 
-            font-size: 26px; 
-            font-weight: 800; 
-            letter-spacing: -0.05em; 
-            line-height: 1; 
-        }
-        .brand-main span { font-weight: 300; color: #8E8E93; }
-
-        /* Cartões de Luxo */
-        .luxury-card { 
-            background: var(--card-bg); 
-            border-radius: 24px; 
-            padding: 12px; 
-            border: 1px solid rgba(0,0,0,0.03);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-        }
-        .luxury-card:active { transform: scale(0.96); opacity: 0.8; }
-
-        .img-wrapper { 
-            background: #F2F2F7; 
-            border-radius: 20px; 
-            aspect-ratio: 1/1; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 12px; 
-            margin-bottom: 12px;
-            overflow: hidden;
-        }
-        .img-wrapper img { transition: transform 0.5s ease; }
-        .luxury-card:hover .img-wrapper img { transform: scale(1.1); }
-
-        /* Botões */
-        .btn-premium { 
-            background: var(--accent); 
-            color: white; 
-            padding: 20px; 
-            border-radius: 20px; 
-            font-weight: 700; 
-            width: 100%; 
-            text-transform: uppercase; 
-            font-size: 12px;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.25);
-            transition: all 0.3s;
-        }
-        .btn-premium:active { transform: scale(0.98); box-shadow: none; }
-
-        /* BARRA DE MENU - AJUSTADA PARA SER MAIS BAIXA E MENOR */
-        .dynamic-nav { 
-            position: fixed; 
-            bottom: 15px; /* De 30px para 15px (mais baixo) */
-            left: 50%; 
-            transform: translateX(-50%); 
-            background: #1C1C1E; 
-            padding: 10px 30px; /* Diminuído padding vertical e horizontal */
-            border-radius: 100px; 
-            display: flex; 
-            gap: 30px; /* De 45px para 30px (menor) */
-            z-index: 1000;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        .nav-btn { color: #8E8E93; font-size: 10px; font-weight: 600; text-align: center; transition: 0.3s; }
-        .nav-btn i { font-size: 18px !important; margin-bottom: 2px !important; } /* Ícones levemente menores */
-        .nav-btn.active { color: #FFFFFF; }
-
-        /* Painéis Laterais */
-        .panel { 
-            position: fixed; 
-            top: 0; 
-            right: -100%; 
-            width: 100%; 
-            height: 100%; 
-            background: #F2F2F7; 
-            z-index: 2000; 
-            transition: 0.5s cubic-bezier(0.32, 1, 0.23, 1); 
-            padding: 25px; 
-        }
-        @media (min-width: 768px) { .panel { width: 420px; border-left: 1px solid rgba(0,0,0,0.05); } }
-        .panel.active { right: 0; box-shadow: -20px 0 60px rgba(0,0,0,0.1); }
-
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .p-card h2 { font-family: 'Syncopate'; font-size: 1.3rem; margin-bottom: 20px; color: var(--primary); }
+        .p-card .price-item { margin-bottom: 20px; border-bottom: 1px solid #1a1a1a; padding-bottom: 15px; }
+        .p-card .price-label { font-size: 0.7rem; font-weight: 800; color: #555; text-transform: uppercase; }
+        .p-card .price-value { font-size: 2rem; font-weight: 800; color: white; }
+        .p-card .price-value span { font-size: 0.9rem; color: #555; }
         
-        /* Animação de Entrada */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* --- BOTÕES --- */
+        .btn { 
+            padding: 18px 35px; border-radius: 14px; font-weight: 800; text-decoration: none; 
+            text-transform: uppercase; cursor: pointer; transition: 0.3s; display: inline-block; border: none; font-size: 0.9rem; text-align: center;
         }
-        .animate-item { animation: fadeInUp 0.5s ease forwards; }
+        .btn-primary { background: var(--primary); color: #000; box-shadow: 0 5px 15px var(--primary-glow); }
+        .btn-primary:hover { box-shadow: 0 0 30px var(--primary-glow); transform: translateY(-3px); }
 
-        .gold-card { 
-            background: linear-gradient(135deg, #1A1A1E 0%, #3A3A3C 100%); 
-            color: white; 
-            padding: 24px; 
-            border-radius: 28px;
-            position: relative;
-            overflow: hidden;
+        /* --- FORMULÁRIO --- */
+        .cta-section { padding: 100px 8%; display: flex; align-items: center; justify-content: center; background: var(--bg); }
+        .form-box { background: var(--card); padding: 50px; border-radius: 30px; width: 100%; max-width: 500px; border: 1px solid #1a1a1a; }
+        input, select { 
+            width: 100%; padding: 16px; margin-bottom: 15px; background: #000; border: 1px solid #222; 
+            color: white; border-radius: 12px; font-size: 1rem; transition: 0.3s;
         }
-        .gold-card::after {
-            content: ''; position: absolute; top: -50%; right: -20%; width: 150px; height: 150px;
-            background: rgba(255,255,255,0.05); border-radius: 50%;
+        select optgroup { background: #000; color: var(--primary); font-weight: 800; }
+        select option { background: #0d0d0d; color: white; }
+
+        footer { padding: 50px; text-align: center; border-top: 1px solid #111; color: #444; font-size: 0.8rem; }
+
+        @media (max-width: 768px) {
+            .hero { min-height: auto; padding-bottom: 60px; }
+            .p-card.featured { transform: none; margin: 20px 0; }
+            .pricing-title { font-size: 1.5rem; }
+            nav { padding: 20px 5%; }
+            .info-grid { padding-top: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <header class="glass sticky top-0 z-[100] px-6 py-5" id="main-header">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div class="cursor-pointer" onclick="location.reload()">
-                <p class="brand-top italic">COMPRE SEM SAIR DE CASA</p>
-                <h1 class="brand-main">SHOPP<span></span> STORE</h1>
-            </div>
-            <button onclick="openPanel('profile-panel')" class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm border border-gray-100 transition-transform active:scale-90">
-                <i class="fa-solid fa-user text-gray-800"></i>
-            </button>
-        </div>
-        <div id="search-box" class="max-w-6xl mx-auto overflow-hidden transition-all duration-500 max-h-0 opacity-0">
-            <div class="mt-4 relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" id="search-input" oninput="liveSearch()" placeholder="O que você deseja hoje?" 
-                       class="w-full p-4 pl-12 bg-gray-100 rounded-2xl outline-none font-medium focus:bg-white focus:ring-2 ring-blue-500/20 transition-all">
-            </div>
-        </div>
-    </header>
-    
-    <main class="max-w-6xl mx-auto px-6 py-8">
-        <div id="vitrine" class="grid grid-cols-2 md:grid-cols-4 gap-5"></div>
-    </main>
-
-    <nav class="dynamic-nav">
-        <button onclick="location.reload()" class="nav-btn active"><i class="fa-solid fa-house-chimney block text-xl mb-1"></i>Início</button>
-        <button onclick="toggleSearch()" class="nav-btn"><i class="fa-solid fa-search block text-xl mb-1"></i>Busca</button>
-        <button onclick="openPanel('cart-panel')" class="nav-btn relative"><i class="fa-solid fa-shopping-bag block text-xl mb-1"></i><span id="cart-count" class="absolute -top-1 -right-2 bg-blue-600 text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-bold text-white border-2 border-[#1C1C1E]">0</span>Sacola</button>
+    <nav>
+        <a href="#" class="logo">ALCA<span>TEIA</span></a>
+        <a href="#matricula" class="btn btn-primary" style="padding: 12px 20px; font-size: 0.7rem;">Inscreva-Se</a>
     </nav>
 
-    <div id="profile-panel" class="panel overflow-y-auto no-scrollbar">
-        <button onclick="closePanels()" class="mb-8 w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm"><i class="fa-solid fa-times"></i></button>
-        <div id="profile-content"></div>
-    </div>
-
-    <div id="cart-panel" class="panel flex flex-col">
-        <div class="flex justify-between items-center mb-8">
-            <h3 class="text-2xl font-black italic uppercase tracking-tighter">Sua Sacola</h3>
-            <button onclick="closePanels()" class="w-10 h-10 flex items-center justify-center bg-gray-200 rounded-full"><i class="fa-solid fa-xmark"></i></button>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>MAIS QUE UMA ACADEMIA,<br><span style="color: var(--primary)">UM LUGAR ONDE SUA META VIRA PRIORIDADE.</span></h1>
+            <p>Treinamento de elite com tecnologia de ponta. A academia que entende o seu objetivo.</p>
+            <a href="#planos" class="btn btn-primary">VER PLANOS</a>
         </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto space-y-4 no-scrollbar"></div>
-        <div class="pt-6 border-t mt-4">
-            <div class="mb-5">
-                <label class="text-[10px] font-extrabold text-gray-400 uppercase mb-2 block tracking-widest">Pagamento</label>
-                <select id="payment-method" class="w-full p-4 bg-white rounded-2xl border-none shadow-sm font-bold text-sm outline-none appearance-none">
-                    <option value="PIX">PIX (Envio imediato)</option>
-                    <option value="Cartão de Crédito">Cartão de Crédito</option>
-                    <option value="Dinheiro">Dinheiro</option>
+    </section>
+
+    <section class="info-grid">
+        <div class="info-card">
+            <i data-lucide="shield-check" size="35"></i>
+            <h3>BIOMECÂNICA</h3>
+            <p>Equipamentos ajustados para máxima ativação muscular e zero lesão.</p>
+        </div>
+        <div class="info-card">
+            <i data-lucide="trending-up" size="35"></i>
+            <h3>ALTA PERFORMANCE</h3>
+            <p>O ambiente perfeito para quem não aceita resultados medíocres.</p>
+        </div>
+        <div class="info-card">
+            <i data-lucide="users" size="35"></i>
+            <h3>COMUNIDADE</h3>
+            <p>Treine com os melhores. Na matilha, ninguém fica para trás.</p>
+        </div>
+    </section>
+
+    <section class="pricing" id="planos">
+        <h2 class="pricing-title">PREÇOS TRANSPARENTES</h2>
+        <div class="price-container">
+            <div class="p-card">
+                <h2>PLANOS MENSAIS</h2>
+                <div class="price-item">
+                    <div class="price-label">COMPLETO (Seg-Sab)</div>
+                    <div class="price-value">R$ 100<span>/mês</span></div>
+                </div>
+                <div class="price-item">
+                    <div class="price-label">SEM ESTEIRA (TODO DIA)</div>
+                    <div class="price-value">R$ 90<span>/mês</span></div>
+                </div> 
+                <div class="price-item" style="border:none">
+                    <div class="price-label">3X SEMANA (C/ ESTEIRA)</div>
+                    <div class="price-value">R$ 70<span>/mês</span></div>
+                </div>
+                <a href="#matricula" class="btn" style="border: 1px solid #333; color: white; width: 100%; margin-top: 15px;">MATRICULAR</a>
+            </div>
+
+            <div class="p-card featured">
+                <h2>TRIMESTRAIS</h2>
+                <div class="price-item">
+                    <div class="price-label">TODO DIA</div>
+                    <div class="price-value">R$ 250<span>/total</span></div>
+                </div>
+                <div class="price-item" style="border:none">
+                    <div class="price-label">3X NA SEMANA</div>
+                    <div class="price-value">R$ 150<span>/total</span></div>
+                </div>
+                <a href="#matricula" class="btn btn-primary" style="width: 100%; margin-top: 15px;">OBTER ACESSO</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="matricula">
+        <div class="form-box">
+            <h2 style="font-family:'Syncopate'; margin-bottom: 30px; text-align: center; color: var(--primary);">MATRÍCULA ONLINE</h2>
+            <form id="formMatricula">
+                <input type="text" id="nome" placeholder="NOME COMPLETO" required>
+                <input type="tel" id="whatsapp" placeholder="SEU WHATSAPP" required>
+                <select id="plano" required>
+                    <option value="">SELECIONE SEU PLANO</option>
+                    <optgroup label="PLANOS MENSAIS">
+                        <option value="Mensal R$100">COMPLETO (Seg-Sab) - R$ 100</option>
+                        <option value="Mensal R$90">SEM ESTEIRA (Todo dia) - R$ 90</option>
+                        <option value="Mensal R$70">3X SEMANA (C/ Esteira) - R$ 70</option>
+                        <option value="Mensal R$60">3X SEMANA (S/ Esteira) - R$ 60</option>
+                    </optgroup>
+                    <optgroup label="PLANOS TRIMESTRAIS">
+                        <option value="Trimestral R$250">TODO DIA - R$ 250</option>
+                        <option value="Trimestral R$150">3X NA SEMANA - R$ 150</option>
+                    </optgroup>
                 </select>
-            </div>
-            <div class="flex justify-between items-end mb-8">
-                <span class="text-gray-400 font-bold uppercase text-[10px] mb-1">Total do Pedido</span>
-                <span id="total-price" class="text-3xl font-black text-blue-600">R$ 0,00</span>
-            </div>
-            <button onclick="finishOrder()" class="btn-premium">FINALIZAR NO WHATSAPP</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width: 100%;">CONFIRMAR AGORA</button>
+            </form>
         </div>
-    </div>
+    </section>
 
-    <div id="product-panel" class="panel overflow-y-auto no-scrollbar">
-        <button onclick="closePanels()" class="mb-6 w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm"><i class="fa-solid fa-chevron-left"></i></button>
-        <div id="product-content"></div>
-    </div>
+    <footer>
+        <p>&copy; 2026 ALCATEIA</p>
+    </footer>
 
     <script>
-        // Todo o seu código JavaScript original abaixo...
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => {}); });
-        }
+        lucide.createIcons();
+        const _supabase = supabase.createClient("https://zkhradhpwakvtgsilsyj.supabase.co", "sb_publishable_UrUxPsPD3XBTANwwp3tZOA_-REppnf3");
 
-        const SUPABASE_URL = 'https://zkhradhpwakvtgsilsyj.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_UrUxPsPD3XBTANwwp3tZOA_-REppnf3';
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        const AVATAR_PADRAO = "https://img.freepik.com/vetores-premium/modelo-de-vetor-de-logotipo-de-carrinho-de-compras-azul_591497-165.jpg"; 
-
-        let allProducts = [];
-        let shoppingCart = [];
-        let currentUser = JSON.parse(localStorage.getItem('user_shopp_v4')) || null;
-
-        async function init() {
-            const { data } = await _supabase.from('produtos').select('*');
-            allProducts = data || [];
-            renderVitrine(allProducts);
-            renderProfileUI();
-        }
-
-        function toggleSearch() {
-            const box = document.getElementById('search-box');
-            if(box.classList.contains('max-h-0')) {
-                box.classList.remove('max-h-0', 'opacity-0');
-                box.classList.add('max-h-[100px]', 'opacity-100');
+        document.getElementById('formMatricula').onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmit');
+            btn.innerText = "REGISTRANDO...";
+            const { error } = await _supabase.from('matriculas').insert([{
+                nome: document.getElementById('nome').value.toUpperCase(),
+                whatsapp: document.getElementById('whatsapp').value,
+                plano: document.getElementById('plano').value,
+                status: 'Pendente'
+            }]);
+            if (!error) { 
+                alert("BEM-VINDO À ALCATEIA! Fique atento ao seu WhatsApp."); 
+                location.reload(); 
             } else {
-                box.classList.add('max-h-0', 'opacity-0');
-                box.classList.remove('max-h-[100px]', 'opacity-100');
+                alert("Erro ao enviar. Tente novamente.");
+                btn.innerText = "CONFIRMAR AGORA";
             }
-        }
-
-        function renderVitrine(list) {
-            document.getElementById('vitrine').innerHTML = list.map((p, index) => {
-                const img = Array.isArray(p.images) ? p.images[0] : p.images;
-                const hasPromo = p.promo_price && p.promo_price > 0;
-                return `
-                <div class="luxury-card animate-item" style="animation-delay: ${index * 0.05}s" onclick="openProduct('${p.id}')">
-                    <div class="img-wrapper"><img src="${img}" class="max-h-full object-contain"></div>
-                    <span class="text-[9px] font-bold text-blue-600 uppercase tracking-widest opacity-70">${p.category}</span>
-                    <h4 class="font-bold text-sm leading-tight mt-1 line-clamp-2 h-10">${p.name}</h4>
-                    <div class="mt-3">
-                        ${hasPromo ? `
-                            <span class="text-[10px] text-gray-400 line-through">R$ ${Number(p.price).toLocaleString('pt-br')}</span>
-                            <p class="text-xl font-black text-blue-600 leading-none">R$ ${Number(p.promo_price).toLocaleString('pt-br')}</p>
-                        ` : `
-                            <p class="text-xl font-black mt-1">R$ ${Number(p.price).toLocaleString('pt-br')}</p>
-                        `}
-                    </div>
-                </div>`;
-            }).join('');
-        }
-
-        function openProduct(id) {
-            const p = allProducts.find(x => String(x.id) === String(id));
-            if(!p) return;
-            const imgs = Array.isArray(p.images) ? p.images : [p.images];
-            const hasPromo = p.promo_price && p.promo_price > 0;
-
-            document.getElementById('product-content').innerHTML = `
-                <div class="space-y-6 pb-24">
-                    <div class="bg-white rounded-[40px] p-10 flex items-center justify-center h-80 shadow-sm border border-black/5"><img id="main-photo" src="${imgs[0]}" class="max-h-full object-contain"></div>
-                    <div class="flex gap-3 overflow-x-auto no-scrollbar py-2">
-                        ${imgs.map((img, i) => `<div onclick="changePhoto('${img}', this)" class="w-20 h-20 bg-white rounded-2xl border-2 border-transparent p-2 cursor-pointer flex-shrink-0 opacity-40 transition-all ${i===0?'thumb-active':''}"><img src="${img}" class="w-full h-full object-contain"></div>`).join('')}
-                    </div>
-                    <div>
-                        <span class="text-blue-600 font-extrabold text-[10px] uppercase tracking-[0.2em] mb-2 block">${p.category}</span>
-                        <h2 class="text-3xl font-black tracking-tight leading-tight">${p.name}</h2>
-                    </div>
-                    <div class="py-4 border-y border-black/5">
-                        ${hasPromo ? `
-                            <span class="text-sm text-gray-400 line-through font-medium">Original: R$ ${Number(p.price).toLocaleString('pt-br')}</span>
-                            <p class="text-4xl font-black text-blue-600">R$ ${Number(p.promo_price).toLocaleString('pt-br')}</p>
-                        ` : `
-                            <p class="text-4xl font-black">R$ ${Number(p.price).toLocaleString('pt-br')}</p>
-                        `}
-                    </div>
-                    <p class="text-gray-500 font-medium leading-relaxed">${p.description || 'Produto exclusivo Jardson Imports com garantia de qualidade e procedência.'}</p>
-                    <button onclick="addToCart('${p.id}')" class="btn-premium">ADICIONAR À SACOLA</button>
-                </div>`;
-            openPanel('product-panel');
-        }
-
-        function changePhoto(url, el) {
-            document.getElementById('main-photo').src = url;
-            document.querySelectorAll('.thumb-active').forEach(t => {
-                t.classList.remove('thumb-active');
-                t.classList.add('opacity-40');
-            });
-            el.classList.add('thumb-active');
-            el.classList.remove('opacity-40');
-        }
-
-        function addToCart(id) {
-            if(!currentUser) { 
-                alert("Por favor, preencha seu perfil antes de comprar.");
-                closePanels(); openPanel('profile-panel'); 
-                return; 
-            }
-            const product = allProducts.find(p => String(p.id) === String(id));
-            if(product) { 
-                shoppingCart.push(product); 
-                updateCartUI(); 
-                closePanels(); 
-                openPanel('cart-panel'); 
-            }
-        }
-
-        function updateCartUI() {
-            document.getElementById('cart-count').innerText = shoppingCart.length;
-            let total = 0;
-            document.getElementById('cart-items').innerHTML = shoppingCart.map((item, i) => {
-                const price = item.promo_price && item.promo_price > 0 ? item.promo_price : item.price;
-                total += Number(price);
-                return `<div class="flex items-center gap-4 bg-white p-5 rounded-3xl shadow-sm border border-black/5">
-                    <div class="w-16 h-16 bg-gray-50 rounded-2xl p-2 flex-shrink-0"><img src="${Array.isArray(item.images)?item.images[0]:item.images}" class="w-full h-full object-contain"></div>
-                    <div class="flex-1">
-                        <h4 class="font-bold text-xs line-clamp-1">${item.name}</h4>
-                        <p class="font-black text-blue-600 mt-1 text-sm">R$ ${Number(price).toLocaleString('pt-br')}</p>
-                    </div>
-                    <button onclick="shoppingCart.splice(${i},1); updateCartUI();" class="text-red-300 hover:text-red-500 p-2 transition-colors"><i class="fa-solid fa-trash-can"></i></button>
-                </div>`;
-            }).join('');
-            document.getElementById('total-price').innerText = `R$ ${total.toLocaleString('pt-br', {minimumFractionDigits: 2})}`;
-        }
-
-        function renderProfileUI() {
-            const div = document.getElementById('profile-content');
-            if(currentUser) {
-                div.innerHTML = `
-                    <div class="gold-card mb-8">
-                        <div class="flex items-center gap-5">
-                            <div class="relative">
-                                <img src="${AVATAR_PADRAO}" class="w-16 h-16 rounded-2xl object-cover border-2 border-white/20 shadow-lg">
-                                <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-blue-500 rounded-full border-2 border-[#1A1A1E] flex items-center justify-center text-[8px] font-bold">✓</div>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-xl">${currentUser.nome}</h4>
-                                <p class="text-[10px] text-blue-400 font-extrabold uppercase tracking-widest">Membro Exclusivo</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="bg-white p-5 rounded-3xl border border-black/5 flex items-center gap-5">
-                            <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600"><i class="fa-solid fa-map-location-dot"></i></div>
-                            <div><p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Endereço de Entrega</p><p class="text-sm font-bold text-gray-800">${currentUser.endereco}, ${currentUser.numero}</p></div>
-                        </div>
-                        <div class="bg-white p-5 rounded-3xl border border-black/5 flex items-center gap-5">
-                            <div class="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600"><i class="fa-solid fa-compass"></i></div>
-                            <div><p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Bairro / Referência</p><p class="text-sm font-bold text-gray-800">${currentUser.bairro} — <span class="text-gray-500 font-medium">${currentUser.ponto_ref}</span></p></div>
-                        </div>
-                    </div>
-                    <button onclick="localStorage.removeItem('user_shopp_v4'); location.reload();" class="w-full mt-12 py-4 text-red-500 font-extrabold text-[11px] uppercase text-center bg-red-50 rounded-2xl">Alterar Perfil de Cliente</button>`;
-            } else {
-                div.innerHTML = `
-                    <div class="text-center mb-10">
-                        <div class="relative inline-block mb-6">
-                            <img src="${AVATAR_PADRAO}" class="w-28 h-28 rounded-[40px] border-4 border-white shadow-2xl object-cover">
-                            <div class="absolute bottom-0 right-0 bg-blue-600 w-8 h-8 rounded-2xl flex items-center justify-center border-4 border-[#F2F2F7]"><i class="fa-solid fa-plus text-white text-xs"></i></div>
-                        </div>
-                        <h4 class="text-3xl font-black tracking-tighter">PERFIL</h4>
-                        <p class="text-gray-400 text-sm mt-1 px-4">Cadastre-se para uma experiência de compra rápida e personalizada.</p>
-                    </div>
-                    <form id="profile-form" class="space-y-4">
-                        <div class="bg-white rounded-[24px] p-3 border border-black/5 shadow-sm">
-                            <div class="px-4 pt-1 text-[9px] font-black text-blue-600 uppercase">Nome Completo</div>
-                            <input type="text" id="p-nome" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent">
-                        </div>
-                        <div class="bg-white rounded-[24px] p-3 border border-black/5 shadow-sm">
-                            <div class="px-4 pt-1 text-[9px] font-black text-blue-600 uppercase">Rua / Logradouro</div>
-                            <input type="text" id="p-endereco" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent">
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white rounded-[24px] p-3 border border-black/5 shadow-sm">
-                                <div class="px-4 pt-1 text-[9px] font-black text-blue-600 uppercase">Número</div>
-                                <input type="text" id="p-numero" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent">
-                            </div>
-                            <div class="bg-white rounded-[24px] p-3 border border-black/5 shadow-sm">
-                                <div class="px-4 pt-1 text-[9px] font-black text-blue-600 uppercase">Bairro</div>
-                                <input type="text" id="p-bairro" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent">
-                            </div>
-                        </div>
-                        <div class="bg-white rounded-[24px] p-3 border border-black/5 shadow-sm">
-                            <div class="px-4 pt-1 text-[9px] font-black text-blue-600 uppercase">Ponto de Referência</div>
-                            <input type="text" id="p-ponto-ref" required class="w-full p-4 pt-1 outline-none font-bold bg-transparent">
-                        </div>
-                        <button type="submit" class="btn-premium mt-10">CRIAR MEU PERFIL</button>
-                    </form>`;
-                
-                document.getElementById('profile-form').onsubmit = (e) => { 
-                    e.preventDefault(); 
-                    currentUser = { 
-                        nome: document.getElementById('p-nome').value, 
-                        endereco: document.getElementById('p-endereco').value, 
-                        numero: document.getElementById('p-numero').value, 
-                        bairro: document.getElementById('p-bairro').value, 
-                        ponto_ref: document.getElementById('p-ponto-ref').value 
-                    }; 
-                    localStorage.setItem('user_shopp_v4', JSON.stringify(currentUser)); 
-                    renderProfileUI(); 
-                };
-            }
-        }
-
-        function openPanel(id) { document.getElementById(id).classList.add('active'); }
-        function closePanels() { document.querySelectorAll('.panel').forEach(p => p.classList.remove('active')); }
-        function liveSearch() { 
-            const q = document.getElementById('search-input').value.toLowerCase(); 
-            renderVitrine(allProducts.filter(p => p.name.toLowerCase().includes(q))); 
-        }
-
-        function finishOrder() {
-            if(shoppingCart.length === 0) return alert("Sua sacola está vazia!");
-            
-            const agora = new Date();
-            const dataPedido = agora.toLocaleDateString('pt-BR');
-            const horaPedido = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-            const numeroPedido = Math.floor(1000 + Math.random() * 9000);
-            const formaPagamento = document.getElementById('payment-method').value;
-
-            let msg = `🚀 *NOVO PEDIDO - JARDSON IMPORTS*\n\n`;
-            msg += `📅 *DATA DO PEDIDO:* ${dataPedido}\n`;
-            msg += `⏰ *HORÁRIO:* ${horaPedido}\n`;
-            msg += `🆔 *Nº DO PEDIDO:* #${numeroPedido}\n\n`;
-            msg += `📦 *ITENS DO PEDIDO:*\n`;
-
-            let total = 0;
-            shoppingCart.forEach(p => {
-                const preco = p.promo_price > 0 ? p.promo_price : p.price;
-                total += Number(preco);
-                msg += `• Produto: ${p.name}\n`;
-                msg += `  └ Valor: R$ ${Number(preco).toLocaleString('pt-BR')}\n\n`;
-            });
-
-            msg += `💳 *FORMA DE PAGAMENTO:* ${formaPagamento}\n\n`;
-            msg += `🚚 *DADOS PARA ENTREGA*\n`;
-            msg += `📍 Endereço: ${currentUser.endereco}, ${currentUser.numero}\n`;
-            msg += `🏘️ Bairro: ${currentUser.bairro}\n`;
-            msg += `🔍 Referência: ${currentUser.ponto_ref}\n\n`;
-
-            msg += `💰 *TOTAL A PAGAR:* R$ ${total.toLocaleString('pt-BR')}\n\n`;
-            msg += `👤 *CLIENTE:* ${currentUser.nome}\n`;
-            msg += `*JARDSON IMPORTS – QUALIDADE E CONFIANÇA*`;
-
-            window.open(`https://wa.me/5596991557184?text=${encodeURIComponent(msg)}`);
-        }
-
-        init();
+        };
     </script>
 </body>
 </html>
